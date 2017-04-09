@@ -1,12 +1,21 @@
 import Q from 'q';
-import { sendRequest } from './util';
+import {
+  sendRequest,
+  validateDate,
+} from './util';
 
 export default function neo(): object {
   return {
 
     feed(options: object = {}): undefined {
       const deferred = Q.defer();
-      sendRequest('neo/rest/v1/feed',
+      if (options.start_date && !validateDate(options.start_date)) {
+        deferred.reject(new Error('start_date must be in "YYYY-MM-DD" format'));
+      }
+      if (options.end_date && !validateDate(options.start_date)) {
+        deferred.reject(new Error('end_date must be in "YYYY-MM-DD" format'));
+      }
+      sendRequest('https://api.nasa.gov/neo/rest/v1/feed',
         options,
         (err: string, data: object): undefined => {
           if (err) return deferred.reject(err);
@@ -18,7 +27,7 @@ export default function neo(): object {
 
     feedToday(options: object = {}): undefined {
       const deferred = Q.defer();
-      sendRequest('neo/rest/v1/feed/today',
+      sendRequest('https://api.nasa.gov/neo/rest/v1/feed/today',
         options,
         (err: string, data: object): undefined => {
           if (err) return deferred.reject(err);
@@ -31,7 +40,7 @@ export default function neo(): object {
     fetch(asteroidId: string): undefined {
       const deferred = Q.defer();
       if (!asteroidId) deferred.reject(new Error('asteroidId is required'));
-      sendRequest(`neo/rest/v1/neo/${asteroidId}`,
+      sendRequest(`https://api.nasa.gov/neo/rest/v1/neo/${asteroidId}`,
         {},
         (err: string, data: object): undefined => {
           if (err) return deferred.reject(err);
@@ -41,10 +50,10 @@ export default function neo(): object {
       return deferred.promise;
     },
 
-    browse(): undefined {
+    browse(options: object = {}): undefined {
       const deferred = Q.defer();
-      sendRequest('neo/rest/v1/neo/browse',
-        {},
+      sendRequest('https://api.nasa.gov/neo/rest/v1/neo/browse',
+        options,
         (err: string, data: object): undefined => {
           if (err) return deferred.reject(err);
           return deferred.resolve(data);
@@ -55,7 +64,7 @@ export default function neo(): object {
 
     stats(): undefined {
       const deferred = Q.defer();
-      sendRequest('neo/rest/v1/stats',
+      sendRequest('https://api.nasa.gov/neo/rest/v1/stats',
         {},
         (err: string, data: object): undefined => {
           if (err) return deferred.reject(err);

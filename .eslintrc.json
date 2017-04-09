@@ -12,7 +12,8 @@
     "mocha": true
   },
   "globals": {
-    "expect": false
+    "expect": false,
+    "assert": false
   },
   "rules": {
     "quotes": [2, "single"],

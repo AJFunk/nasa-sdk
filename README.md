@@ -33,9 +33,11 @@ setNasaApiKey('<your-api-key>')
 - - -
 <h3 id='apod-fetch'>APOD.fetch(options)</h3>
 returns information for the [Astronomy Picture of the Day](https://apod.nasa.gov/apod/astropix.html)
+
 ##### `options` (optional) - **[Object]**
 * `date` - **[String]** The date of the APOD image to retrieve. Default is today's date Must be in the format YYYY-MM-DD
 * `hd` - **[Boolean]** Determines if the the URL for the high resolution image should be fetched. Default is `false`
+
 ```javascript
 APOD.fetch(options)
     .then(data => console.log(data))
@@ -44,10 +46,12 @@ APOD.fetch(options)
 
 <h3 id='neo-feed'>NEO.feed(options)</h3>
 Get a list of Near Earth Objects within a date range. The max range for one query is 7 days.
+
 ##### `options` (optional) - **[Object]**
 * `start_date` - **[String]** Starting date for asteroid search. Default is today's date. Must be in the format YYYY-MM-DD
 * `end_date` - **[String]** End date for asteroid search. Default is 7 days after `start_date`. Must be in the format YYYY-MM-DD
 * `detailed` - **[Boolean]** Determine is additional details for asteroids should be included. Default is `false`
+
 ```javascript
 NEO.feed({
     start_date: '2016-06-12',
@@ -59,8 +63,10 @@ NEO.feed({
 
 <h3 id='neo-feedtoday'>NEO.feedToday(options)</h3>
 Get a list of Near Earth Objects for today. The max range for one query is 7 days.
+
 ##### `options` (optional) - **[Object]**
 * `detailed` - **[Boolean]** Determine is additional details for asteroids should be included. Default is `false`
+
 ```javascript
 NEO.feedToday()
    .then(data => console.log(data))
@@ -69,7 +75,9 @@ NEO.feedToday()
 
 <h3 id='neo-fetch'>NEO.fetch(asteroidId)</h3>
 Retieve a Near Earth Object with a given id
+
 ##### `asteroidId` (required) - **[String]** ID of NEO
+
 ```javascript
 NEO.fetch('3729835')
    .then(data => console.log(data))
@@ -78,9 +86,11 @@ NEO.fetch('3729835')
 
 <h3 id='neo-browse'>NEO.browse()</h3>
 Retieve a paginated list of Near Earth Objects
+
 ##### `options` (optional) - **[Object]**
 * `page` - **[Number]** Page number (zero-indexed)
 * `size` - **[Number]** Number of NEOs per page
+
 ```javascript
 NEO.browse({
      page: 2,
@@ -91,7 +101,9 @@ NEO.browse({
 ```
 
 <h3 id='neo-stats'>NEO.stats()</h3>
+
 Retieve Near Earth Object statistics
+
 ```javascript
 NEO.stats()
    .then(data => console.log(data))
