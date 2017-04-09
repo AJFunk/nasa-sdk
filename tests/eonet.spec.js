@@ -7,9 +7,10 @@ describe('EONET.events()', () => {
       expect(data.events).to.be.instanceof(Array);
     });
   });
-  it('returns object', () => {
-    EONET.events({ eventId: 'EONET_2763' }).then((data) => expect(data).to.be.instanceof(Object));
-  });
+
+  it('returns object', () =>
+    EONET.events({ eventId: 'EONET_2763' }).then((data) => expect(data).to.be.instanceof(Object))
+  );
 });
 
 describe('EONET.categories()', () => {
@@ -19,9 +20,10 @@ describe('EONET.categories()', () => {
       expect(data.categories).to.be.instanceof(Array);
     });
   });
-  it('returns object', () => {
-    EONET.categories({ categoryId: 6 }).then((data) => expect(data).to.be.instanceof(Object));
-  });
+
+  it('returns object', () =>
+    EONET.categories({ categoryId: 6 }).then((data) => expect(data).to.be.instanceof(Object))
+  );
 });
 
 describe('EONET.sources()', () => {
@@ -40,7 +42,8 @@ describe('EONET.layers()', () => {
       expect(data.layers).to.be.instanceof(Array);
     });
   });
-  it('returns object', () => {
-    EONET.layers({ categoryId: 8 }).then((data) => expect(data).to.be.instanceof(Object));
-  });
+
+  it('returns object', () =>
+    EONET.layers({ categoryId: 8 }).then((data) => expect(data).to.be.instanceof(Object))
+  );
 });
