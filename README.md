@@ -9,7 +9,7 @@ npm install --save nasa-sdk
 ```
 ### Usage
 ```javascript
-import { APOD, NEO } from 'nasa-sdk';
+import { APOD, NEO, Earth } from 'nasa-sdk';
 ```
 Only import the modules you need. For example, if you only need the `APOD` and `EONET` modules:
 ```javascript
@@ -29,6 +29,10 @@ setNasaApiKey('<your-api-key>')
 * [NEO.fetch()](#neo-fetch)
 * [NEO.browse()](#neo-browse)
 * [NEO.stats()](#neo-stats)
+
+## Earth
+* [Earth.imagery()](#earth-imagery)
+* [Earth.assets()](#earth-assets)
 
 - - -
 <h3 id='apod-fetch'>APOD.fetch(options)</h3>
@@ -106,6 +110,47 @@ Retieve Near Earth Object statistics
 
 ```javascript
 NEO.stats()
+   .then(data => console.log(data))
+   .catch(err => console.log(err));
+```
+
+<h3 id="earth-imagery">Earth.imagery(options)</h3>
+
+Retrieves the Landsat 8 image for the supplied location and date
+
+##### `options` (optional) - **[Object]**
+* `lat` - **[Float]** The latitude of the imagery's location to retrieve.
+* `lon` - **[Float]** The longitude of the imagery's location to retrieve.
+* `date` - **[String]** The date of the imagery to retrieve. Default is today's date. Must be in the format `YYYY-MM-DD`
+* `cloud_score` - **[Boolean]** Cloud score calculates the percentage of the image covered by clouds when `true`. Default is `false`.
+
+```javascript
+Earth.imagery({
+     lon: 100.75,
+     lat: 1.5,
+     date: '2014-02-01',
+     cloud_score: true,
+   })
+   .then(data => console.log(data))
+   .catch(err => console.log(err));
+```
+
+<h3 id="earth-assets">Earth.assets(options)</h3>
+
+Retrieves the date-times and asset names for available imagery for a supplied location
+
+##### `options` (optional) - **[Object]**
+* `lat` - **[Float]** The latitude of the asset's location to retrieve.
+* `lon` - **[Float]** The longitude of the asset's location to retrieve.
+* `begin` - **[String]** The beginning date of the asset to retrieve. Must be in the format `YYYY-MM-DD`
+* `end` - **[String]** The ending date of the asset to retrieve. Default is today's date. Must be in the format `YYYY-MM-DD`
+
+```javascript
+Earth.assets({
+     lon: 100.75,
+     lat: 1.5,
+     begin: '2014-02-01',
+   })
    .then(data => console.log(data))
    .catch(err => console.log(err));
 ```
