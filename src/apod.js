@@ -3,7 +3,7 @@ import Q from 'q';
 import { apiKey } from './config';
 
 export default function apod(): object {
-  function sendRequest(endpoint: string, options: object = {}, cb: object): undefined {
+  function sendRequest(options: object = {}, cb: object): undefined {
     let url = 'https://api.nasa.gov/planetary/apod?';
     if (options) {
       if (options.date) url = `${url}date=${options.date}&`;
