@@ -1,24 +1,37 @@
 import Q from 'q';
-import { sendRequest } from './util';
+import {
+  sendRequest,
+  validateDate,
+  validateColor,
+} from './util';
 
 export default function epic(): object {
   return {
 
-    natural(urlParam: string = ''): undefined {
+    fetch(color: string): undefined {
       const deferred = Q.defer();
-      sendRequest(`epic/api/natural/${urlParam}`,
-        {},
-        (err: string, data: object): undefined => {
-          if (err) return deferred.reject(err);
-          return deferred.resolve(data);
-        }
-      );
+      if (!color) deferred.reject(new Error('color is required'));
+      if (color && !validateColor(color)) {
+        deferred.reject(new Error('color must equal "natural" or "enhanced"'));
+      }
+      sendRequest(`https://api.nasa.gov/EPIC/api/${color}`, {}, (err: string, data: object): undefined => {
+        if (err) return deferred.reject(err);
+        return deferred.resolve(data);
+      });
       return deferred.promise;
     },
 
-    enhanced(urlParam: string = ''): undefined {
+    date(color: string, date: string): undefined {
       const deferred = Q.defer();
-      sendRequest(`epic/api/enhanced/${urlParam}`,
+      if (!color) deferred.reject(new Error('color is required'));
+      if (!date) deferred.reject(new Error('date is required'));
+      if (color && !validateColor(color)) {
+        deferred.reject(new Error('color must equal "natural" or "enhanced"'));
+      }
+      if (date && !validateDate(date)) {
+        deferred.reject(new Error('date must be in "YYYY-MM-DD" format'));
+      }
+      sendRequest(`https://api.nasa.gov/EPIC/api/${color}/date/${date}`,
         {},
         (err: string, data: object): undefined => {
           if (err) return deferred.reject(err);
