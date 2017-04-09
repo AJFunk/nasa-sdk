@@ -1,11 +1,20 @@
 import Q from 'q';
-import { sendRequest } from './util';
+import {
+  sendRequest,
+  validateDate,
+} from './util';
 
 export default function neo(): object {
   return {
 
     feed(options: object = {}): undefined {
       const deferred = Q.defer();
+      if (options.start_date && !validateDate(options.start_date)) {
+        deferred.reject(new Error('start_date must be in "YYYY-MM-DD" format'));
+      }
+      if (options.end_date && !validateDate(options.start_date)) {
+        deferred.reject(new Error('end_date must be in "YYYY-MM-DD" format'));
+      }
       sendRequest('https://api.nasa.gov/neo/rest/v1/feed',
         options,
         (err: string, data: object): undefined => {
@@ -41,10 +50,10 @@ export default function neo(): object {
       return deferred.promise;
     },
 
-    browse(): undefined {
+    browse(options: object = {}): undefined {
       const deferred = Q.defer();
       sendRequest('https://api.nasa.gov/neo/rest/v1/neo/browse',
-        {},
+        options,
         (err: string, data: object): undefined => {
           if (err) return deferred.reject(err);
           return deferred.resolve(data);
