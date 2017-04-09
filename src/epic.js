@@ -6,7 +6,7 @@ export default function epic(): object {
 
     natural(urlParam: string = ''): undefined {
       const deferred = Q.defer();
-      sendRequest(`https://api.nasa.gov/epic/api/natural/${urlParam}`,
+      sendRequest(`epic/api/natural/${urlParam}`,
         {},
         (err: string, data: object): undefined => {
           if (err) return deferred.reject(err);
@@ -18,7 +18,7 @@ export default function epic(): object {
 
     enhanced(urlParam: string = ''): undefined {
       const deferred = Q.defer();
-      sendRequest(`https://api.nasa.gov/epic/api/enhanced/${urlParam}`,
+      sendRequest(`epic/api/enhanced/${urlParam}`,
         {},
         (err: string, data: object): undefined => {
           if (err) return deferred.reject(err);
