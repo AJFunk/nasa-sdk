@@ -2,7 +2,7 @@ import axios from 'axios';
 import { apiKey } from './config';
 
 const sendRequest = (endpoint: string, options: object = {}, cb: object): undefined => {
-  let url = `${endpoint}?`;
+  let url = `https://api.nasa.gov/${endpoint}?`;
   if (options) {
     for (const key in options) {
       if (options.hasOwnProperty(key)) {
