@@ -9,7 +9,6 @@ export default function neo(): object {
 
     feed(options: object = {}): undefined {
       const deferred = Q.defer();
-      if (!options.start_date) deferred.reject(new Error('start_date is required'));
       if (!validateDate(options.start_date)) {
         deferred.reject(new Error('start_date must be in "YYYY-MM-DD" format'));
       }
