@@ -6,7 +6,7 @@ export default function neo(): object {
 
     feed(options: object = {}): undefined {
       const deferred = Q.defer();
-      sendRequest('neo/rest/v1/feed',
+      sendRequest('https://api.nasa.gov/neo/rest/v1/feed',
         options,
         (err: string, data: object): undefined => {
           if (err) return deferred.reject(err);
@@ -18,7 +18,7 @@ export default function neo(): object {
 
     feedToday(options: object = {}): undefined {
       const deferred = Q.defer();
-      sendRequest('neo/rest/v1/feed/today',
+      sendRequest('https://api.nasa.gov/neo/rest/v1/feed/today',
         options,
         (err: string, data: object): undefined => {
           if (err) return deferred.reject(err);
@@ -31,7 +31,7 @@ export default function neo(): object {
     fetch(asteroidId: string): undefined {
       const deferred = Q.defer();
       if (!asteroidId) deferred.reject(new Error('asteroidId is required'));
-      sendRequest(`neo/rest/v1/neo/${asteroidId}`,
+      sendRequest(`https://api.nasa.gov/neo/rest/v1/neo/${asteroidId}`,
         {},
         (err: string, data: object): undefined => {
           if (err) return deferred.reject(err);
@@ -43,7 +43,7 @@ export default function neo(): object {
 
     browse(): undefined {
       const deferred = Q.defer();
-      sendRequest('neo/rest/v1/neo/browse',
+      sendRequest('https://api.nasa.gov/neo/rest/v1/neo/browse',
         {},
         (err: string, data: object): undefined => {
           if (err) return deferred.reject(err);
@@ -55,7 +55,7 @@ export default function neo(): object {
 
     stats(): undefined {
       const deferred = Q.defer();
-      sendRequest('neo/rest/v1/stats',
+      sendRequest('https://api.nasa.gov/neo/rest/v1/stats',
         {},
         (err: string, data: object): undefined => {
           if (err) return deferred.reject(err);
