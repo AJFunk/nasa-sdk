@@ -1,6 +1,8 @@
 ## NASA SDK
 NASA API wrapper for Node.js
 
+[![Build Status](https://travis-ci.org/AJFunk/nasa-sdk.svg?branch=master)](https://travis-ci.org/AJFunk/nasa-sdk)
+
 ### Installation
 ```sh
 npm install --save nasa-sdk

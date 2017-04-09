@@ -1,6 +1,6 @@
 {
   "name": "nasa-sdk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "SDK for NASA API",
   "keyword": [
     ""
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/AJFunk/nasa-sdk"
+    "url": "git+https://github.com/AJFunk/nasa-sdk.git"
   },
   "license": "MIT",
   "scripts": {
@@ -43,5 +43,15 @@
   "dependencies": {
     "axios": "^0.14.0",
     "q": "^1.4.1"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/AJFunk/nasa-sdk/issues"
+  },
+  "homepage": "https://github.com/AJFunk/nasa-sdk#readme",
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": [
+    "nasa"
+  ]
 }
