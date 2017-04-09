@@ -9,7 +9,7 @@ export default function neo(): object {
 
     feed(options: object = {}): undefined {
       const deferred = Q.defer();
-      if (!validateDate(options.start_date)) {
+      if (options.start_date && !validateDate(options.start_date)) {
         deferred.reject(new Error('start_date must be in "YYYY-MM-DD" format'));
       }
       if (options.end_date && !validateDate(options.start_date)) {
