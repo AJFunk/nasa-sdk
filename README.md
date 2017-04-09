@@ -30,8 +30,15 @@ setNasaApiKey('<your-api-key>')
 * [NEO.browse()](#neo-browse)
 * [NEO.stats()](#neo-stats)
 
+## EONET
+* [EONET.events()](#eonet-events)
+* [EONET.categories()](#eonet-categories)
+* [EONET.sources()](#eonet-sources)
+* [EONET.layers()](#eonet-layers)
+
 - - -
 <h3 id='apod-fetch'>APOD.fetch(options)</h3>
+
 returns information for the [Astronomy Picture of the Day](https://apod.nasa.gov/apod/astropix.html)
 
 ##### `options` (optional) - **[Object]**
@@ -106,6 +113,77 @@ Retieve Near Earth Object statistics
 
 ```javascript
 NEO.stats()
+   .then(data => console.log(data))
+   .catch(err => console.log(err));
+```
+
+<h3 id="eonet-events">EONET.events(options)</h3>
+
+Retrieves a single or list of natural Events recorded by [EONET](https://eonet.sci.gsfc.nasa.gov/)
+
+##### `options` (optional) - **[Object]**
+* `eventId` - **[String]** ID of the Event. Pass this property if you are wanting to fetch a single event
+* `source` - **[String]** Filter events by Source ID. Multiple Source IDs can be included in the request via CSV (i.e '`InciWeb,EO`')
+* `status` - **[String]** `open|closed`. Filter events by only-open or only-closed. Default is `open`.
+* `limit` - **[Number]** Limits the number of events returned
+* `days` - **[Number]** Limit the number of of prior days (including today) from which events will be returned
+
+```javascript
+EONET.events({
+     eventId: 'EONET_2763'
+     source: 'UNISYS',
+     status: 'open',
+     limit: 5,
+     days: 20
+   })
+   .then(data => console.log(data))
+   .catch(err => console.log(err));
+```
+
+<h3 id="eonet-categories">EONET.categories(options)</h3>
+
+Retrieves a single or list of types of events by which individual events are cataloged.
+
+##### `options` (optional) - **[Object]**
+* `categoryId` - **[Number]** ID of the Category. Pass this property if you are wanting to fetch a single category of events
+* `source` - **[String]** Filter categorized events by Source ID. Multiple Source IDs can be included in the request via CSV (i.e '`InciWeb,EO`')
+* `status` - **[String]** `open|closed`. Filter categorized events by only-open or only-closed. Default is `open`.
+* `limit` - **[Number]** Limits the number of categorized events returned
+* `days` - **[Number]** Limit the number of of prior days (including today) from which categorized events will be returned
+
+```javascript
+EONET.categories({
+     categoryId: 14,
+     source: 'InciWeb,EO',
+     status: 'open',
+     limit: 5,
+     days: 20
+   })
+   .then(data => console.log(data))
+   .catch(err => console.log(err));
+```
+
+<h3 id="eonet-sources">EONET.sources()</h3>
+
+Retrieves a list of references for further information about an event.
+
+```javascript
+EONET.sources()
+   .then(data => console.log(data))
+   .catch(err => console.log(err));
+```
+
+<h3 id="eonet-layers">EONET.layers(options)</h3>
+
+Retrieves a list of references to a specific web service (e.g., WMS, WMTS) that can be used to produce imagery of a particular NASA data parameter.
+
+##### `options` (optional) - **[Object]**
+* `categoryId` - **[Number]** ID of the Category by which to filter the Layers.
+
+```javascript
+EONET.layers({
+     categoryId: 8
+   })
    .then(data => console.log(data))
    .catch(err => console.log(err));
 ```
