@@ -29,5 +29,29 @@ export default function neo(): object {
       return deferred.promise;
     },
 
+    browse(): undefined {
+      const deferred = Q.defer();
+      sendRequest('https://api.nasa.gov/neo/rest/v1/neo/browse',
+        {},
+        (err: string, data: object): undefined => {
+          if (err) return deferred.reject(err);
+          return deferred.resolve(data);
+        }
+      );
+      return deferred.promise;
+    },
+
+    stats(): undefined {
+      const deferred = Q.defer();
+      sendRequest('https://api.nasa.gov/neo/rest/v1/stats',
+        {},
+        (err: string, data: object): undefined => {
+          if (err) return deferred.reject(err);
+          return deferred.resolve(data);
+        }
+      );
+      return deferred.promise;
+    },
+
   };
 }
