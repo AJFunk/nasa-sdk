@@ -17,6 +17,12 @@ const sendRequest = (endpoint: string, options: object = {}, cb: object): undefi
     .catch((err: object): object => cb(err));
 };
 
+const validateDate = (date: string): boolean => {
+  if (!date || typeof date !== 'string') return false;
+  return date.match(/^\d{4}-\d{2}-\d{2}$/) !== null;
+};
+
 export {
   sendRequest,
+  validateDate,
 };
