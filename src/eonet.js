@@ -7,7 +7,7 @@ export default function eonet(): object {
     events(options: object = {}): undefined {
       const deferred = Q.defer();
       let endpoint = 'https://eonet.sci.gsfc.nasa.gov/api/v2.1/events';
-      if (options.eventId) endpoint = `${endpoint}/${options.eventId}`;
+      if (options.hasOwnProperty('eventId')) endpoint = `${endpoint}/${options.eventId}`;
       sendRequest(endpoint,
         options,
         (err: string, data: object): undefined => {
@@ -21,7 +21,7 @@ export default function eonet(): object {
     categories(options: object = {}): undefined {
       const deferred = Q.defer();
       let endpoint = 'https://eonet.sci.gsfc.nasa.gov/api/v2.1/categories';
-      if (options.categoryId) endpoint = `${endpoint}/${options.categoryId}`;
+      if (options.hasOwnProperty('categoryId')) endpoint = `${endpoint}/${options.categoryId}`;
       sendRequest(endpoint,
         options,
         (err: string, data: object): undefined => {
@@ -47,7 +47,7 @@ export default function eonet(): object {
     layers(options: object = {}): undefined {
       const deferred = Q.defer();
       let endpoint = 'https://eonet.sci.gsfc.nasa.gov/api/v2.1/layers';
-      if (options.categoryId) endpoint = `${endpoint}/${options.categoryId}`;
+      if (options.hasOwnProperty('categoryId')) endpoint = `${endpoint}/${options.categoryId}`;
       sendRequest(endpoint,
         {},
         (err: string, data: object): undefined => {

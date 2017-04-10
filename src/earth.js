@@ -9,8 +9,9 @@ export default function earth(): object {
 
     imagery(options: object = {}): undefined {
       const deferred = Q.defer();
-      if (options.date && !validateDate(options.date)) {
+      if (options.hasOwnProperty('date') && !validateDate(options.date)) {
         deferred.reject(new Error('date must be in "YYYY-MM-DD" format'));
+        return deferred.promise;
       }
       sendRequest('https://api.nasa.gov/planetary/earth/imagery',
         options,
@@ -24,11 +25,13 @@ export default function earth(): object {
 
     assets(options: object = {}): undefined {
       const deferred = Q.defer();
-      if (options.begin && !validateDate(options.begin)) {
+      if (options.hasOwnProperty('begin') && !validateDate(options.begin)) {
         deferred.reject(new Error('begin must be in "YYYY-MM-DD" format'));
+        return deferred.promise;
       }
-      if (options.end && !validateDate(options.end)) {
+      if (options.hasOwnProperty('end') && !validateDate(options.end)) {
         deferred.reject(new Error('end must be in "YYYY-MM-DD" format'));
+        return deferred.promise;
       }
       sendRequest('https://api.nasa.gov/planetary/earth/assets',
         options,

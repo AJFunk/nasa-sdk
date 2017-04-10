@@ -9,11 +9,13 @@ export default function neo(): object {
 
     feed(options: object = {}): undefined {
       const deferred = Q.defer();
-      if (options.start_date && !validateDate(options.start_date)) {
+      if (options.hasOwnProperty('start_date') && !validateDate(options.start_date)) {
         deferred.reject(new Error('start_date must be in "YYYY-MM-DD" format'));
+        return deferred.promise;
       }
-      if (options.end_date && !validateDate(options.start_date)) {
+      if (options.hasOwnProperty('end_date') && !validateDate(options.end_date)) {
         deferred.reject(new Error('end_date must be in "YYYY-MM-DD" format'));
+        return deferred.promise;
       }
       sendRequest('https://api.nasa.gov/neo/rest/v1/feed',
         options,
