@@ -1,10 +1,7 @@
 {
   "name": "nasa-sdk",
-  "version": "0.0.4",
+  "version": "0.1.3",
   "description": "SDK for NASA API",
-  "keyword": [
-    ""
-  ],
   "author": "AJ Funk <aj@ajfunk.me>",
   "main": "lib/index.js",
   "engines": {
