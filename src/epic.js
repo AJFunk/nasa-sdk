@@ -40,12 +40,25 @@ export default function epic(): object {
       const deferred = Q.defer();
       if (type) {
         if (!validateColor(type)) deferred.reject(new Error('type must equal "natural||enhanced"'));
-      } else deferred.reject(new Error('color is required'));
+      } else deferred.reject(new Error('type is required'));
       sendRequest(`https://api.nasa.gov/EPIC/api/${type}/all`, {}, (err: string, data: object): undefined => {
         if (err) return deferred.reject(err);
         return deferred.resolve(data);
       });
       return deferred.promise;
     },
+
+    available(type: string): undefined {
+      const deferred = Q.defer();
+      if (type) {
+        if (!validateColor(type)) deferred.reject(new Error('type must equal "natural||enhanced"'));
+      } else deferred.reject(new Error('type is required'));
+      sendRequest(`https://api.nasa.gov/EPIC/api/${type}/available`, {}, (err: string, data: object): undefined => {
+        if (err) return deferred.reject(err);
+        return deferred.resolve(data);
+      });
+      return deferred.promise;
+    },
+
   };
 }
