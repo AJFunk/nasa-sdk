@@ -317,6 +317,7 @@ describe('Earth.assets()', () => {
       lon: 100.75,
       lat: 1.5,
       begin: '2014-02-01',
+      end: '2017-04-09',
     }).then((data) => assert.deepEqual(data, earthAssetObj));
   });
 });
