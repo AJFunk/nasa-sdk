@@ -6,6 +6,7 @@ const EONET = require('./eonet')();
 const MarsPhotos = require('./mars-photos')();
 const NEO = require('./neo')();
 const Patents = require('./patents')();
+const Sounds = require('./sounds')();
 
 export {
   APOD,
@@ -14,5 +15,6 @@ export {
   MarsPhotos,
   NEO,
   Patents,
+  Sounds,
   setNasaApiKey,
 };

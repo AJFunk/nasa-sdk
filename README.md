@@ -47,6 +47,9 @@ setNasaApiKey('<your-api-key>')
 ## Patents
 * [Patents.fetch()](#patents-fetch)
 
+## Sounds
+* [Sounds.fetch()](#sounds-fetch)
+
 - - -
 <h3 id='apod-fetch'>APOD.fetch(options)</h3>
 
@@ -58,9 +61,9 @@ returns information for the [Astronomy Picture of the Day](https://apod.nasa.gov
 
 ```javascript
 APOD
-	.fetch(options)
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
+  .fetch(options)
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 ```
 
 <h3 id="earth-imagery">Earth.imagery(options)</h3>
@@ -75,14 +78,14 @@ Retrieves the Landsat 8 image for the supplied location and date
 
 ```javascript
 Earth
-	.imagery({
-		lon: 100.75,
-	    lat: 1.5,
-     	date: '2014-02-01',
-	    cloud_score: true,
-    })
-   .then(data => console.log(data))
-   .catch(err => console.log(err));
+  .imagery({
+    lon: 100.75,
+	  lat: 1.5,
+    date: '2014-02-01',
+	  cloud_score: true,
+  })
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 ```
 
 <h3 id="earth-assets">Earth.assets(options)</h3>
@@ -98,12 +101,12 @@ Retrieves the date-times and asset names for available imagery for a supplied lo
 ```javascript
 Earth
 	.assets({
-        lon: 100.75,
-     	lat: 1.5,
-     	begin: '2014-02-01',
-	})
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
+    lon: 100.75,
+    lat: 1.5,
+    begin: '2014-02-01',
+  })
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 ```
 
 <h3 id="eonet-events">EONET.events(options)</h3>
@@ -119,15 +122,15 @@ Retrieves a single or list of natural Events recorded by [EONET](https://eonet.s
 
 ```javascript
 EONET
-	.events({
-		eventId: 'EONET_2763'
-     	source: 'UNISYS',
-     	status: 'open',
-     	limit: 5,
-     	days: 20,
-	})
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
+  .events({
+    eventId: 'EONET_2763'
+    source: 'UNISYS',
+    status: 'open',
+    limit: 5,
+    days: 20,
+  })
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 ```
 
 <h3 id="eonet-categories">EONET.categories(options)</h3>
@@ -143,15 +146,15 @@ Retrieves a single or list of types of events by which individual events are cat
 
 ```javascript
 EONET
-	.categories({
-		categoryId: 14,
-     	source: 'InciWeb,EO',
-     	status: 'open',
-     	limit: 5,
-     	days: 20,
-	})
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
+  .categories({
+    categoryId: 14,
+    source: 'InciWeb,EO',
+    status: 'open',
+    limit: 5,
+    days: 20,
+  })
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 ```
 
 <h3 id="eonet-sources">EONET.sources()</h3>
@@ -160,9 +163,9 @@ Retrieves a list of references for further information about an event.
 
 ```javascript
 EONET
-	.sources()
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
+  .sources()
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 ```
 
 <h3 id="eonet-layers">EONET.layers(options)</h3>
@@ -174,11 +177,11 @@ Retrieves a list of references to a specific web service (e.g., WMS, WMTS) that 
 
 ```javascript
 EONET
-	.layers({
+  .layers({
 		categoryId: 8
 	})
 	.then(data => console.log(data))
-    .catch(err => console.log(err));
+  .catch(err => console.log(err));
 ```
 
 <h3 id='marsphotos-fetch'>MarsPhotos.fetch(roverName, options)</h3>
@@ -199,8 +202,8 @@ MarsPhotos
 		camera: 'navcam',
 		sol: 10
 	})
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 ```
 
 <h3 id='marsphotos-manifest'>MarsPhotos.manifest(roverName)</h3>
@@ -230,8 +233,8 @@ NEO
 		start_date: '2016-06-12',
 		end_date: '2016-06-15'
 	})
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 ```
 
 <h3 id='neo-feedtoday'>NEO.feedToday(options)</h3>
@@ -243,8 +246,8 @@ Get a list of Near Earth Objects for today. The max range for one query is 7 day
 ```javascript
 NEO
 	.feedToday()
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 ```
 
 <h3 id='neo-fetch'>NEO.fetch(asteroidId)</h3>
@@ -268,12 +271,12 @@ Retieve a paginated list of Near Earth Objects
 
 ```javascript
 NEO
-	.browse({
-		page: 2,
+  .browse({
+    page: 2,
 		size: 20
-   })
-   .then(data => console.log(data))
-   .catch(err => console.log(err));
+  })
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 ```
 
 <h3 id='neo-stats'>NEO.stats()</h3>
@@ -282,7 +285,7 @@ Retieve Near Earth Object statistics
 
 ```javascript
 NEO
-	.stats()
+  .stats()
 	.then(data => console.log(data))
 	.catch(err => console.log(err));
 ```
@@ -298,9 +301,25 @@ Retrieve of list of patents from NASA's patent portfolio
 ```javascript
 Patents
 	.fetch({
-    	query: 'temperature',
-        concept_tags: true,
-    })
+    query: 'temperature',
+    concept_tags: true,
+  })
+	.then(data => console.log(data))
+	.catch(err => console.log(err));
+```
+
+<h3 id="sounds-fetch">Sounds.fetch(options)</h3>
+Retrieve of list of audio resources containing sounds from space
+
+##### `options` (optional) - **[Object]**
+* `q` - **[String]** Search text to filter results
+* `limit` - **[Number]** Maximum number of tracks to return. If omitted, all found tracks will be returned.
+
+```javascript
+Sounds
+	.fetch({
+    limit: 5
+  })
 	.then(data => console.log(data))
 	.catch(err => console.log(err));
 ```
