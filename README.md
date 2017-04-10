@@ -44,6 +44,9 @@ setNasaApiKey('<your-api-key>')
 * [NEO.browse()](#neo-browse)
 * [NEO.stats()](#neo-stats)
 
+## Patents
+* [Patents.fetch()](#patents-fetch)
+
 - - -
 <h3 id='apod-fetch'>APOD.fetch(options)</h3>
 
@@ -280,6 +283,24 @@ Retieve Near Earth Object statistics
 ```javascript
 NEO
 	.stats()
+	.then(data => console.log(data))
+	.catch(err => console.log(err));
+```
+
+<h3 id="patents-fetch">Patents.fetch(options)</h3>
+Retrieve of list of patents from NASA's patent portfolio
+
+##### `options` (optional) - **[Object]**
+* `query` - **[String]** Search text to filter results
+* `concept_tags` - **[Boolean]** Return an ordered dictionary of concepts from the patent abstract. Default is `false`
+* `limit` - **[Number]** Maximum number of patents to return. If omitted, all found patents will be returned.
+
+```javascript
+Patents
+	.fetch({
+    	query: 'temperature',
+        concept_tags: true,
+    })
 	.then(data => console.log(data))
 	.catch(err => console.log(err));
 ```
