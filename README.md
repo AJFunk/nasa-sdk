@@ -20,34 +20,37 @@ To set your API Key, set the environment variable `NASA_API_KEY`. Alternatively,
 import { setNasaApiKey } from 'nasa-sdk';
 setNasaApiKey('<your-api-key>')
 ```
-## APOD
+
+Be sure to reference [NASA's API docs](https://api.nasa.gov/api.html)
+
+## APOD - Astronomy Picture of the Day
 * [APOD.fetch()](#apod-fetch)
 
-## Earth
+## Earth - Landsat 8 imagery of Earth
 * [Earth.imagery()](#earth-imagery)
 * [Earth.assets()](#earth-assets)
 
-## EONET
+## EONET - Earth Observatory Natural Event Tracker
 * [EONET.events()](#eonet-events)
 * [EONET.categories()](#eonet-categories)
 * [EONET.sources()](#eonet-sources)
 * [EONET.layers()](#eonet-layers)
 
-## Mars Photos
+## Mars Photos - Photos from Mars Rovers
 * [MarsPhotos.fetch()](#marsphotos-fetch)
 * [MarsPhotos.manifest()](#marsphotos-manifest)
 
-## NEO
+## NEO - Near Earth Objects
 * [NEO.feed()](#neo-feed)
 * [NEO.feedToday()](#neo-feedtoday)
 * [NEO.fetch()](#neo-fetch)
 * [NEO.browse()](#neo-browse)
 * [NEO.stats()](#neo-stats)
 
-## Patents
+## Patents - NASA's Patent Portfolio
 * [Patents.fetch()](#patents-fetch)
 
-## Sounds
+## Sounds - Sounds from Space
 * [Sounds.fetch()](#sounds-fetch)
 
 - - -
