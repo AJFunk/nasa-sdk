@@ -1,13 +1,9 @@
-import apod from './apod';
-import neo from './neo';
-import eonet from './eonet';
-import earth from './earth';
 import { setNasaApiKey } from './config';
 
-const APOD = apod();
-const NEO = neo();
-const EONET = eonet();
-const Earth = earth();
+const APOD = require('./apod')();
+const NEO = require('./neo')();
+const EONET = require('./eonet')();
+const Earth = require('./earth')();
 
 export {
   APOD,
