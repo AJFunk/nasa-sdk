@@ -2,6 +2,7 @@ import Q from 'q';
 import {
   sendRequest,
   validateDate,
+  handleError,
 } from './util';
 
 export default function earth(): object {
@@ -10,13 +11,12 @@ export default function earth(): object {
     imagery(options: object = {}): undefined {
       const deferred = Q.defer();
       if (options.hasOwnProperty('date') && !validateDate(options.date)) {
-        deferred.reject(new Error('date must be in "YYYY-MM-DD" format'));
-        return deferred.promise;
+        return handleError('date must be in "YYYY-MM-DD" format', deferred);
       }
       sendRequest('https://api.nasa.gov/planetary/earth/imagery',
         options,
         (err: string, data: object): undefined => {
-          if (err) return deferred.reject(err);
+          if (err) return handleError(err, deferred);
           return deferred.resolve(data);
         }
       );
@@ -26,17 +26,15 @@ export default function earth(): object {
     assets(options: object = {}): undefined {
       const deferred = Q.defer();
       if (options.hasOwnProperty('begin') && !validateDate(options.begin)) {
-        deferred.reject(new Error('begin must be in "YYYY-MM-DD" format'));
-        return deferred.promise;
+        return handleError('date must be in "YYYY-MM-DD" format', deferred);
       }
       if (options.hasOwnProperty('end') && !validateDate(options.end)) {
-        deferred.reject(new Error('end must be in "YYYY-MM-DD" format'));
-        return deferred.promise;
+        return handleError('date must be in "YYYY-MM-DD" format', deferred);
       }
       sendRequest('https://api.nasa.gov/planetary/earth/assets',
         options,
         (err: string, data: object): undefined => {
-          if (err) return deferred.reject(err);
+          if (err) return handleError(err, deferred);
           return deferred.resolve(data);
         }
       );
