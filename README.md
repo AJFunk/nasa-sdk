@@ -204,7 +204,7 @@ Retrieves the date-times and asset names for available imagery for a supplied lo
 
 ```javascript
 Earth
-	.assets({
+  .assets({
     lon: 100.75,
     lat: 1.5,
     begin: '2014-02-01',
@@ -282,9 +282,9 @@ Retrieves a list of references to a specific web service (e.g., WMS, WMTS) that 
 ```javascript
 EONET
   .layers({
-		categoryId: 8
-	})
-	.then(data => console.log(data))
+    categoryId: 8
+  })
+  .then(data => console.log(data))
   .catch(err => console.log(err));
 ```
 
@@ -366,10 +366,10 @@ Rover to fetch photos from. Valid rover names are `curiosity`, `opportunity`, an
 
 ```javascript
 MarsPhotos
-	.fetch('curiosity', {
-		camera: 'navcam',
-		sol: 10
-	})
+  .fetch('curiosity', {
+    camera: 'navcam',
+    sol: 10
+  })
   .then(data => console.log(data))
   .catch(err => console.log(err));
 ```
@@ -382,9 +382,9 @@ Rover to fetch manifest for. Valid rover names are `curiosity`, `opportunity`, a
 
 ```javascript
 MarsPhotos
-	.manifest('curiosity')
-	.then(data => console.log(data))
-	.catch(err => console.log(err));
+  .manifest('curiosity')
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 ```
 
 <h3 id='neo-feed'>NEO.feed(options)</h3>
@@ -397,10 +397,10 @@ Get a list of Near Earth Objects within a date range. The max range for one quer
 
 ```javascript
 NEO
-	.feed({
-		start_date: '2016-06-12',
-		end_date: '2016-06-15'
-	})
+  .feed({
+    start_date: '2016-06-12',
+    end_date: '2016-06-15'
+  })
   .then(data => console.log(data))
   .catch(err => console.log(err));
 ```
@@ -413,7 +413,7 @@ Get a list of Near Earth Objects for today. The max range for one query is 7 day
 
 ```javascript
 NEO
-	.feedToday()
+  .feedToday()
   .then(data => console.log(data))
   .catch(err => console.log(err));
 ```
@@ -425,9 +425,9 @@ Retieve a Near Earth Object with a given id
 
 ```javascript
 NEO
-	.fetch('3729835')
-	.then(data => console.log(data))
-	.catch(err => console.log(err));
+  .fetch('3729835')
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 ```
 
 <h3 id='neo-browse'>NEO.browse()</h3>
@@ -441,7 +441,7 @@ Retieve a paginated list of Near Earth Objects
 NEO
   .browse({
     page: 2,
-		size: 20
+    size: 20
   })
   .then(data => console.log(data))
   .catch(err => console.log(err));
@@ -454,8 +454,8 @@ Retieve Near Earth Object statistics
 ```javascript
 NEO
   .stats()
-	.then(data => console.log(data))
-	.catch(err => console.log(err));
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 ```
 
 <h3 id="patents-fetch">Patents.fetch(options)</h3>
@@ -468,12 +468,12 @@ Retrieve of list of patents from NASA's patent portfolio
 
 ```javascript
 Patents
-	.fetch({
+  .fetch({
     query: 'temperature',
     concept_tags: true,
   })
-	.then(data => console.log(data))
-	.catch(err => console.log(err));
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 ```
 
 <h3 id="sounds-fetch">Sounds.fetch(options)</h3>
@@ -485,9 +485,9 @@ Retrieve of list of audio resources containing sounds from space
 
 ```javascript
 Sounds
-	.fetch({
+  .fetch({
     limit: 5
   })
-	.then(data => console.log(data))
-	.catch(err => console.log(err));
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 ```
