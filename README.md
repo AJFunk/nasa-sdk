@@ -198,6 +198,7 @@ EONET
 Retrieves a list of the most recent date of natural or enhanced color imagery
 
 ##### `type` (required) - **[String]**
+
 Type of color imagery to fetch. Valid types are `natural` and `enhanced`
 
 ```javascript
@@ -212,8 +213,11 @@ EPIC
 Retrieves a list of natural or enhanced color imagery available for the specified date
 
 ##### `type` (required) - **[String]**
+
 Type of color imagery to fetch. Valid types are `natural` and `enhanced`
+
 ##### `date` (required) - **[String]**
+
 The date of the `natural` or `enhanced` imagery to retrieve. Must be in the format `YYYY-MM-DD`
 
 ```javascript
@@ -228,6 +232,7 @@ EPIC
 Retrieves a list of all dates with available `natural` or `enhanced` imagery
 
 ##### `type` (required) - **[String]**
+
 Type of color imagery to fetch. Valid types are `natural` and `enhanced`
 
 ```javascript
@@ -242,6 +247,7 @@ EPIC
 Retrieves an alternate listing of all dates with available `natural` or `enhanced` color imagery
 
 ##### `type` (required) - **[String]**
+
 Type of color imagery to fetch. Valid types are `natural` and `enhanced`
 
 ```javascript
