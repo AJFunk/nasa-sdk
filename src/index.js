@@ -1,5 +1,4 @@
 import { setNasaApiKey } from './config';
-setNasaApiKey('t1IThuiPrgNMbpMsJbcmGB1EyvhlbaebAtRO2NKR');
 
 const APOD = require('./apod')();
 const Earth = require('./earth')();
