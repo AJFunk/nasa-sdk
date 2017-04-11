@@ -9,7 +9,7 @@ describe('EONET.events()', () => {
   });
 
   it('returns object', () =>
-    EONET.events({ eventId: 'EONET_2763' }).then((data) => expect(data).to.be.instanceof(Object))
+    EONET.events({ eventId: 'EONET_2761' }).then((data) => expect(data).to.be.instanceof(Object))
   );
 });
 

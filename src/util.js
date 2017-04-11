@@ -22,13 +22,7 @@ const validateDate = (date: string): boolean => {
   return date.match(/^\d{4}-\d{2}-\d{2}$/) !== null;
 };
 
-const validateColor = (color: string): boolean => {
-  if (!color || typeof color !== 'string') return false;
-  return color.match('natural' || 'enhanced') !== null;
-};
-
 export {
   sendRequest,
   validateDate,
-  validateColor,
 };
