@@ -8,6 +8,7 @@ const EPIC = require('./epic')();
 const Fireballs = require('./fireballs')();
 const MarsPhotos = require('./mars-photos')();
 const NEO = require('./neo')();
+const NHATS = require('./nhats')();
 const Patents = require('./patents')();
 const Sentry = require('./sentry')();
 const Sounds = require('./sounds')();
@@ -21,6 +22,7 @@ export {
   Fireballs,
   MarsPhotos,
   NEO,
+  NHATS,
   Patents,
   Sentry,
   Sounds,

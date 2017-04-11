@@ -64,7 +64,7 @@ Be sure to reference [NASA's API docs](https://api.nasa.gov/api.html)
 * [EPIC.all()](#epic-all)
 * [EPIC.available()](#epic-available)
 
-## Fireballs - [Visible Meteor Events](https://cneos.jpl.nasa.gov/fireballs/intro.html)
+## Fireballs - Visible Meteor Events
 * [Fireballs.fetch()](#fireballs-fetch)
 
 ## Mars Photos - Photos from Mars Rovers
@@ -77,6 +77,9 @@ Be sure to reference [NASA's API docs](https://api.nasa.gov/api.html)
 * [NEO.fetch()](#neo-fetch)
 * [NEO.browse()](#neo-browse)
 * [NEO.stats()](#neo-stats)
+
+## NHATS - Near-Earth Object Human Space Flight Accessible Targets Study
+* [NHATS.fetch()](#nhats-fetch)
 
 ## Patents - NASA's Patent Portfolio
 * [Patents.fetch()](#patents-fetch)
@@ -508,7 +511,36 @@ NEO
   .catch(err => console.log(err));
 ```
 
+<h3 id="nhats-fetch">NHATS.fetch(options)</h3>
+
+Retrieve of list of Near-Earth Asteroids (NEAs) that might be accessible by future human space flight missions.
+
+The NHATS API employs various "modes" to obtain required data. This results in restrictions on the combination of options you can use in a single request. For detailed information on this, refer the the [API Documentation](https://ssd-api.jpl.nasa.gov/doc/nhats.html)
+
+##### `options` (optional) - **[Object]**
+* `dv` - **[Number]** Minimum total delta-V (km/s). Allowed values are `4`, `5`, `6`, `7`, `8`,
+`9`, `10`, `11`, `12`. Default value is `12`
+* `dur` - **[Number]** Minimum total duration (days). Allowed values are `60`, `90`, `120`, `150`, `180`, `210`, `240`, `270`, `300`, `330`, `360`, `390`, `420`, `450`. Default value is `450`
+* `stay` - **[Number]** Minimum stay (days). Allowed values are `8`, `16`, `24`, `32`. Default is `8`
+* `launch` - **[String]** Launch window (year range). Allow values are `2015-2020`, `2020-2025`, `2025-2030`, `2030-2035`, `2035-2040`, `2015-2040`
+* `h` - **[Number]** Object’s maximum absolute magnitude, H (mag). Allowed values are `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`, `26`, `27`, `28`, `29`, `30`
+* `occ` - **[Number]** Object’s maximum orbit condition code (OCC). Allowed values are `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`
+* `spk` - **[Number/String]** Select data for the object matching this SPK-ID (e.g., `2000433`).
+* `des` - **[String]** Select data for the object matching this designation (e.g., `2015 AB`, `141P`, or `433`)
+* `plot` - **[Boolean]** Include base-64 encoded plot image file content via output field `plot_base64`
+
+```javascript
+NHATS
+  .fetch({
+    dv: 5,
+    plot: true,
+  })
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+```
+
 <h3 id="patents-fetch">Patents.fetch(options)</h3>
+
 Retrieve of list of patents from NASA's patent portfolio
 
 ##### `options` (optional) - **[Object]**
