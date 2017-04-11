@@ -9,7 +9,17 @@ npm install --save nasa-sdk
 ```
 ### Usage
 ```javascript
-import { APOD, Earth, EONET, EPIC, MarsPhotos, NEO } from 'nasa-sdk';
+import {
+  APOD,
+  CAD,
+  Earth,
+  EONET,
+  EPIC,
+  MarsPhotos,
+  NEO,
+  Patents,
+  Sounds,
+} from 'nasa-sdk';
 ```
 Only import the modules you need. For example, if you only need the `APOD` and `EONET` modules:
 ```javascript
