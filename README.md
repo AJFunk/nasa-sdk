@@ -19,15 +19,20 @@ import {
   Earth,
   EONET,
   EPIC,
+  Fireballs,
   MarsPhotos,
   NEO,
   Patents,
+  Sentry,
   Sounds,
 } from 'nasa-sdk';
 ```
 Only import the modules you need. For example, if you only need the `APOD` and `EONET` modules:
 ```javascript
-import { APOD, EONET } from 'nasa-sdk';
+import {
+  APOD,
+  EONET,
+} from 'nasa-sdk';
 ```
 To set your API Key, set the environment variable `NASA_API_KEY`. Alternatively, you can set the configuration manually:
 ```javascript
@@ -76,6 +81,9 @@ Be sure to reference [NASA's API docs](https://api.nasa.gov/api.html)
 ## Patents - NASA's Patent Portfolio
 * [Patents.fetch()](#patents-fetch)
 
+## Sentry - Earth Impact Monitoring
+* [Sentry.fetch()](#sentry-fetch)
+
 ## Sounds - Sounds from Space
 * [Sounds.fetch()](#sounds-fetch)
 
@@ -104,29 +112,29 @@ Most options are filters effectively limiting the data to those matching the con
 For additional information, see the [API Documentation](https://ssd-api.jpl.nasa.gov/doc/cad.html)
 
 ##### `options` (optional) - **[Object]**
-* `date-min` - **[String]** exclude data earlier than this date Must be in the format `YYYY-MM-DD` or `YYYY-MM-DDThh:mm:ss` or `now` for the current date. Defaults to `now`
-* `date-max` - **[String]** exclude data later than this date Must be in the format `YYYY-MM-DD` or `YYYY-MM-DDThh:mm:ss` or `now` for the current date or `+D` for "D" days after now. Defaults to `+60`
-* `dist-min` - **[String]** exclude data with an approach distance less than this, e.g., `0.05`, `10LD` (default units: au)
-* `dist-max` - **[String]** exclude data with an approach distance greater than this (see `dist-min`)
-* `h-min` - **[Number]** exclude data from objects with H-values less than this
-* `h-max` - **[Number]** exclude data from objects with H-values greater than this
-* `v-inf-min` - **[Number]** exclude data with V-infinity less than this positive value in km/s
-* `v-inf-max` - **[Number]** exclude data with V-infinity greater than this positive value in km/s
-* `v-rel-min` - **[Number]** exclude data with V-relative less than this positive value in km/s
-* `v-rel-max` - **[Number]** exclude data with V-relative greater than this positive value in km/s
-* `class` - **[String]** limit data to objects with the specified orbit-class (see list of valid class names below)
-* `pha` - **[Boolean]** limit data to PHAs
-* `nea` - **[Boolean]** limit data to NEAs
-* `comet` - **[Boolean]** limit data to comets
-* `nea-coment` - **[Boolean]** limit data to NEAs and comets
-* `neo` - **[Boolean]** limit data to NEOs
-* `kind` - **[String]** limit data to objects of the specified kind (`a`=asteriod, `an`=numbered-asteroids, `au`=unnumbered-asteroids, `c`=comets, `cn`=numbered-comets, `cu`=unnumbered-comets, `n`=numbered-objects, and `u`=unnumbered-objects)
-* `spk` - **[Number]** only show data for the object matching this SPK-ID (e.g., `2000433` )
-* `des` - **[String]** only show data for the object matching this designation (e.g., `2015 AB`, `141P` or `433`)
-* `body` - **[String]** limit data to close-approaches to the specified body (e.g., `Earth`) or allow all bodies with `ALL` or `*` (see list of valid bodies below)
-* `sort` - **[String]** sort data on the specified field: `date`, `dist`, `dist-min`, `v-inf`, `v-rel`, `h`, or `object`. Default sort order is ascending, but you can prepend the value with `-` for descending. Default value is `-date`
-* `limit` - **[Number]** limit data to the first N results (where N is the specified number and must be an integer value greater than zero)
-* `fullname` - **[Boolean]** include the full-format object name/designation
+* `date-min` - **[String]** Exclude data earlier than this date Must be in the format `YYYY-MM-DD` or `YYYY-MM-DDThh:mm:ss` or `now` for the current date. Defaults to `now`
+* `date-max` - **[String]** Exclude data later than this date Must be in the format `YYYY-MM-DD` or `YYYY-MM-DDThh:mm:ss` or `now` for the current date or `+D` for "D" days after now. Defaults to `+60`
+* `dist-min` - **[String]** Exclude data with an approach distance less than this, e.g., `0.05`, `10LD` (default units: au)
+* `dist-max` - **[String]** Exclude data with an approach distance greater than this (see `dist-min`)
+* `h-min` - **[Number]** Exclude data from objects with H-values less than this
+* `h-max` - **[Number]** Exclude data from objects with H-values greater than this
+* `v-inf-min` - **[Number]** Exclude data with V-infinity less than this positive value in km/s
+* `v-inf-max` - **[Number]** Exclude data with V-infinity greater than this positive value in km/s
+* `v-rel-min` - **[Number]** Exclude data with V-relative less than this positive value in km/s
+* `v-rel-max` - **[Number]** Exclude data with V-relative greater than this positive value in km/s
+* `class` - **[String]** Limit data to objects with the specified orbit-class (see list of valid class names below)
+* `pha` - **[Boolean]** Limit data to PHAs
+* `nea` - **[Boolean]** Limit data to NEAs
+* `comet` - **[Boolean]** Limit data to comets
+* `nea-coment` - **[Boolean]** Limit data to NEAs and comets
+* `neo` - **[Boolean]** Limit data to NEOs
+* `kind` - **[String]** Limit data to objects of the specified kind (`a`=asteriod, `an`=numbered-asteroids, `au`=unnumbered-asteroids, `c`=comets, `cn`=numbered-comets, `cu`=unnumbered-comets, `n`=numbered-objects, and `u`=unnumbered-objects)
+* `spk` - **[Number]** Only show data for the object matching this SPK-ID (e.g., `2000433` )
+* `des` - **[String]** Only show data for the object matching this designation (e.g., `2015 AB`, `141P` or `433`)
+* `body` - **[String]** Limit data to close-approaches to the specified body (e.g., `Earth`) or allow all bodies with `ALL` or `*` (see list of valid bodies below)
+* `sort` - **[String]** Sort data on the specified field: `date`, `dist`, `dist-min`, `v-inf`, `v-rel`, `h`, or `object`. Default sort order is ascending, but you can prepend the value with `-` for descending. Default value is `-date`
+* `limit` - **[Number]** Limit data to the first N results (where N is the specified number and must be an integer value greater than zero)
+* `fullname` - **[Boolean]** Include the full-format object name/designation
 
 
 ##### SBDB Orbit Class Values
@@ -513,6 +521,31 @@ Patents
   .fetch({
     query: 'temperature',
     concept_tags: true,
+  })
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+```
+
+<h3 id="sentry-fetch">Sentry.fetch(options)</h3>
+
+Returns a list of Near-Earth Asteroids (NEAs) that could potentially impact the Earth in the next 100 years.
+
+The Sentry API employs various "modes" to obtain required data. This results in restrictions on the combination of options you can use in a single request. For detailed information on this, refer the the [API Documentation](https://ssd-api.jpl.nasa.gov/doc/sentry.html)
+
+##### `options` (optional) - **[Object]**
+* `spk` - **[Number]** Select data for the object matching this SPK-ID (e.g., `2029075` )
+* `des` - **[String]** Select data for the object matching this designation (e.g., `29075` or `2000 SG344`) [Note: basename-form may also be used, e.g., `a29075` or `2000sg344`]
+* `h-max` - **[Number]** Limit data to those with an absolute magnitude, H (weighted-mean for mode-S) less than or equal to this value. Accepted range is [-10:100]
+* `ps-min` - **[Number]** Limit data to those with a (weighted-mean for mode-S) Palermo scale (PS) greater than or equal to this value. Accepted range is [-20:20]
+* `ip-min` - **[Number]** Limit data to those with a (weighted-mean for mode-S) impact-probability (IP) greater than or equal to this value. Accepted range is [1:1e^-10]
+* `days` - **[Number]** Number of days since last observation: limit data to those objects that have been observed within the specified number of days (if the number is negative, limit data to those which have not been observed with the specified number of days). Accepted values meet the criterion `ABS(days) > 6`
+* `all` - **[Boolean]** Request the complete VI data set
+* `removed` - **[Boolean]** Request the list of removed objects
+
+```javascript
+Sentry
+  .fetch({
+    all: true
   })
   .then(data => console.log(data))
   .catch(err => console.log(err));

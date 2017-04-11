@@ -9,6 +9,7 @@ const Fireballs = require('./fireballs')();
 const MarsPhotos = require('./mars-photos')();
 const NEO = require('./neo')();
 const Patents = require('./patents')();
+const Sentry = require('./sentry')();
 const Sounds = require('./sounds')();
 
 export {
@@ -21,6 +22,7 @@ export {
   MarsPhotos,
   NEO,
   Patents,
+  Sentry,
   Sounds,
   setNasaApiKey,
 };
