@@ -1,8 +1,6 @@
 import { Fireballs } from 'index';
 
-describe('Fireballs.fetch()', function runTests() {
-  this.timeout(5000);
-
+describe('Fireballs.fetch()', () => {
   it('returns object', () =>
     Fireballs.fetch().then((data) => expect(data).to.be.instanceof(Object))
   );
