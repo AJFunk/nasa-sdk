@@ -43,7 +43,7 @@ Be sure to reference [NASA's API docs](https://api.nasa.gov/api.html)
 ## CAD - SBDB (Small-Body DataBase) Close-Approach Data
 * [CAD.fetch()](#cad-fetch)
 
-## Earth - Landsat 8 imagery of Earth
+## Earth - Landsat 8 Imagery of Earth
 * [Earth.imagery()](#earth-imagery)
 * [Earth.assets()](#earth-assets)
 
@@ -58,6 +58,9 @@ Be sure to reference [NASA's API docs](https://api.nasa.gov/api.html)
 * [EPIC.date()](#epic-date)
 * [EPIC.all()](#epic-all)
 * [EPIC.available()](#epic-available)
+
+## Fireballs - [Visible Meteor Events](https://cneos.jpl.nasa.gov/fireballs/intro.html)
+* [Fireballs.fetch()](#fireballs-fetch)
 
 ## Mars Photos - Photos from Mars Rovers
 * [MarsPhotos.fetch()](#marsphotos-fetch)
@@ -96,13 +99,13 @@ APOD
 
 returns information current close-approach data for all asteroids and comets in JPL’s [SBDB](https://ssd.jpl.nasa.gov/sbdb.cgi) (Small-Body DataBase)
 
-Most options are filters effectively limiting the data to those matching the constraints, a few are object selectors (limit data to those matching the specified object), and one is a sort key. Filter-type options are “additive” in that they are combined with logical `AND` when applied to the data. Boolean-type options are only applied when `true`. For example, setting `options.neo = false` simply disables that filter (it does not select non-NEOs).
+Most options are filters effectively limiting the data to those matching the constraints, a few are object selectors (limit data to those matching the specified object), and one is a sort key. Filter-type options are "additive" in that they are combined with logical `AND` when applied to the data. Boolean-type options are only applied when `true`. For example, setting `options.neo = false` simply disables that filter (it does not select non-NEOs).
 
 For additional information, see the [API Documentation](https://ssd-api.jpl.nasa.gov/doc/cad.html)
 
 ##### `options` (optional) - **[Object]**
 * `date-min` - **[String]** exclude data earlier than this date Must be in the format `YYYY-MM-DD` or `YYYY-MM-DDThh:mm:ss` or `now` for the current date. Defaults to `now`
-* `date-max` - **[String]** exclude data later than this date Must be in the format `YYYY-MM-DD` or `YYYY-MM-DDThh:mm:ss` or `now` for the current date or `+D` for “D” days after now. Defaults to `+60`
+* `date-max` - **[String]** exclude data later than this date Must be in the format `YYYY-MM-DD` or `YYYY-MM-DDThh:mm:ss` or `now` for the current date or `+D` for "D" days after now. Defaults to `+60`
 * `dist-min` - **[String]** exclude data with an approach distance less than this, e.g., `0.05`, `10LD` (default units: au)
 * `dist-max` - **[String]** exclude data with an approach distance greater than this (see `dist-min`)
 * `h-min` - **[Number]** exclude data from objects with H-values less than this
@@ -121,7 +124,7 @@ For additional information, see the [API Documentation](https://ssd-api.jpl.nasa
 * `spk` - **[Number]** only show data for the object matching this SPK-ID (e.g., `2000433` )
 * `des` - **[String]** only show data for the object matching this designation (e.g., `2015 AB`, `141P` or `433`)
 * `body` - **[String]** limit data to close-approaches to the specified body (e.g., `Earth`) or allow all bodies with `ALL` or `*` (see list of valid bodies below)
-* `sort` - **[String]** sort data on the specified field: `date`, `dist`, `dist-min`, `v-inf`, `v-rel`, `h`, or `object`. Default sort order is ascending, but you can prepend the value with `-` for descending)
+* `sort` - **[String]** sort data on the specified field: `date`, `dist`, `dist-min`, `v-inf`, `v-rel`, `h`, or `object`. Default sort order is ascending, but you can prepend the value with `-` for descending. Default value is `-date`
 * `limit` - **[Number]** limit data to the first N results (where N is the specified number and must be an integer value greater than zero)
 * `fullname` - **[Boolean]** include the full-format object name/designation
 
@@ -164,8 +167,13 @@ The following bodies may be selected via the `body` query parameter.
 * `Moon` - Moon
 
 ```javascript
-APOD
-  .fetch(options)
+CAD
+  .fetch({
+    // prop names with hyphens require quotes
+    'date-min': '2015-04-03',
+    'date-max': '+20',
+    body: 'Satrn',
+  })
   .then(data => console.log(data))
   .catch(err => console.log(err));
 ```
@@ -348,6 +356,40 @@ Type of color imagery to fetch. Valid types are `natural` and `enhanced`
 ```javascript
 EPIC
   .available('enhanced')
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+```
+
+<h3 id='fireballs-fetch'>Fireballs.fetch(options)</h3>
+
+Get a list of Fireball events and their associated data. Be sure to reference the [API Documentation](https://ssd-api.jpl.nasa.gov/doc/fireball.html) for more information on Fireballs.
+
+##### `options` (required) - **[Object]**
+* `date-min` - **[String]** exclude data earlier than this date. Must be in `YYYY-MM-DD` or `YYYY-MM-DDThh:mm:ss` format
+* `date-max` - **[String]** exclude data later than this date. Must be in `YYYY-MM-DD` or `YYYY-MM-DDThh:mm:ss` format
+* `energy-min` - **[Number]** exclude data with total-radiated-energy less than this positive value in joules ×1010 (e.g., `0.3` = 0.3×1010 joules)
+* `energy-max` - **[Number]** exclude data with total-radiated-energy greater than this (see `energy-min`)
+* `impact-e-min` - **[Number]** exclude data with estimated impact energy less than this positive value in kilotons (kt) (e.g., `0.08` kt)
+* `impact-e-max` - **[Number]** exclude data with total-radiated-energy greater than this (see impact-e-min)
+* `vel-min` - **[Number]** exclude data with velocity-at-peak-brightness less than this positive value in km/s (e.g., `18.5`)
+* `vel-max` - **[Number]** exclude data with velocity-at-peak-brightness greater than this positive value in km/s (e.g., `20`)
+* `alt-min` - **[Number]** exclude data from objects with an altitude less than this
+* `alt-max` - **[Number]** exclude data from objects with an altitude greater than this
+* `req-loc` - **[Boolean]** location (latitude and longitude) required; when set to `true`, exclude data without a location
+* `req-alt` - **[Boolean]** altitude required; when set to `true`, exclude data without an altitude
+* `req-vel` - **[Boolean]** velocity required; when set to `true`, exclude data without a velocity
+* `req-vel-comp` - **[Boolean]** velocity components required; when set to `true`, exclude data without velocity components
+* `sort` - **[String]** sort data on the specified field: `date`, `energy`, `impact-e`, `vel`, or `alt`. Default sort order is ascending, but you can prepend the value with `-` for descending. Default value is `-date`
+* `limit` - **[Number]** limit data to the first N results (where N is the specified number and must be an integer value greater than zero)
+* `fullname` - **[Boolean]** include the full-format object name/designation
+
+```javascript
+Fireballs
+  .fetch({
+    // prop names with hyphens require quotes
+    'date-min': '2015-04-03',
+    'req-loc': true
+  })
   .then(data => console.log(data))
   .catch(err => console.log(err));
 ```
