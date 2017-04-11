@@ -2,6 +2,7 @@ import Q from 'q';
 import {
   sendRequest,
   validateDate,
+  handleError,
 } from './util';
 
 export default function marsPhotos(): object {
@@ -26,39 +27,28 @@ export default function marsPhotos(): object {
     fetch(rover: string, options: object = {}): undefined {
       const deferred = Q.defer();
 
-      if (!rover) {
-        deferred.reject(new Error('Rover name is required'));
-        return deferred.promise;
-      }
+      if (!rover) return handleError('Rover name is required', deferred);
       const validRover = validateRover(rover);
-      if (!validRover) {
-        deferred.reject(new Error('Invalid rover name'));
-        return deferred.promise;
-      }
+      if (!validRover) return handleError('Invalid rover name', deferred);
 
       let validCamera;
       if (options.hasOwnProperty('camera')) {
         validCamera = validateCamera(validRover, options.camera);
-        if (!validCamera) {
-          deferred.reject(new Error('Invalid camera name'));
-          return deferred.promise;
-        }
+        if (!validCamera) return handleError('Invalid camera name', deferred);
       }
 
       if (!options.hasOwnProperty('sol') && !options.hasOwnProperty('earth_date')) {
-        deferred.reject(new Error('You must provide either earth_date or sol'));
-        return deferred.promise;
+        return handleError('You must provide either earth_date or sol', deferred);
       }
 
       if (options.hasOwnProperty('earth_date') && !validateDate(options.earth_date)) {
-        deferred.reject(new Error('earth_date must be in "YYYY-MM-DD" format'));
-        return deferred.promise;
+        return handleError('earth_date must be in "YYYY-MM-DD" format', deferred);
       }
 
       sendRequest(`https://api.nasa.gov/mars-photos/api/v1/rovers/${validRover}/photos`,
         Object.assign({}, options, { camera: validCamera }),
         (err: string, data: object): undefined => {
-          if (err) return deferred.reject(err);
+          if (err) return handleError(err, deferred);
           return deferred.resolve(data);
         }
       );
@@ -68,14 +58,14 @@ export default function marsPhotos(): object {
     manifest(rover: string): undefined {
       const deferred = Q.defer();
 
-      if (!rover) deferred.reject(new Error('Rover name is required'));
+      if (!rover) return handleError('Rover name is required', deferred);
       const validRover = validateRover(rover);
-      if (!validRover) deferred.reject(new Error('Invalid rover name'));
+      if (!validRover) return handleError('Invalid rover name', deferred);
 
       sendRequest(`https://api.nasa.gov/mars-photos/api/v1/manifests/${validRover}`,
         {},
         (err: string, data: object): undefined => {
-          if (err) return deferred.reject(err);
+          if (err) return handleError(err, deferred);
           return deferred.resolve(data);
         }
       );

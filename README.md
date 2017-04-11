@@ -9,7 +9,7 @@ npm install --save nasa-sdk
 ```
 ### Usage
 ```javascript
-import { APOD, Earth, EONET, MarsPhotos, NEO } from 'nasa-sdk';
+import { APOD, Earth, EONET, EPIC, MarsPhotos, NEO } from 'nasa-sdk';
 ```
 Only import the modules you need. For example, if you only need the `APOD` and `EONET` modules:
 ```javascript
@@ -38,6 +38,12 @@ Be sure to reference [NASA's API docs](https://api.nasa.gov/api.html)
 * [EONET.categories()](#eonet-categories)
 * [EONET.sources()](#eonet-sources)
 * [EONET.layers()](#eonet-layers)
+
+## EPIC - Earth Polychromatic Imaging Camera
+* [EPIC.fetch()](#epic-fetch)
+* [EPIC.date()](#epic-date)
+* [EPIC.all()](#epic-all)
+* [EPIC.available()](#epic-available)
 
 ## Mars Photos - Photos from Mars Rovers
 * [MarsPhotos.fetch()](#marsphotos-fetch)
@@ -265,6 +271,70 @@ EONET
 		categoryId: 8
 	})
 	.then(data => console.log(data))
+  .catch(err => console.log(err));
+```
+
+<h3 id='epic-fetch'>EPIC.fetch(type)</h3>
+
+Retrieves a list of the most recent date of natural or enhanced color imagery
+
+##### `type` (required) - **[String]**
+
+Type of color imagery to fetch. Valid types are `natural` and `enhanced`
+
+```javascript
+EPIC
+  .fetch('natural')
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+```
+
+<h3 id='epic-date'>EPIC.date(type, date)</h3>
+
+Retrieves a list of natural or enhanced color imagery available for the specified date
+
+##### `type` (required) - **[String]**
+
+Type of color imagery to fetch. Valid types are `natural` and `enhanced`
+
+##### `date` (required) - **[String]**
+
+The date of the `natural` or `enhanced` imagery to retrieve. Must be in the format `YYYY-MM-DD`
+
+```javascript
+EPIC
+  .date('enhanced', '2017-04-10')
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+```
+
+<h3 id='epic-all'>EPIC.all(type)</h3>
+
+Retrieves a list of all dates with available `natural` or `enhanced` imagery
+
+##### `type` (required) - **[String]**
+
+Type of color imagery to fetch. Valid types are `natural` and `enhanced`
+
+```javascript
+EPIC
+  .all('natural')
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+```
+
+<h3 id='epic-available'>EPIC.available(type)</h3>
+
+Retrieves an alternate listing of all dates with available `natural` or `enhanced` color imagery
+
+##### `type` (required) - **[String]**
+
+Type of color imagery to fetch. Valid types are `natural` and `enhanced`
+
+```javascript
+EPIC
+  .available('enhanced')
+  .then(data => console.log(data))
   .catch(err => console.log(err));
 ```
 

@@ -2,6 +2,7 @@ import Q from 'q';
 import {
   sendRequest,
   validateDate,
+  handleError,
 } from './util';
 
 export default function apod(): object {
@@ -10,13 +11,12 @@ export default function apod(): object {
     fetch(options: object = {}): undefined {
       const deferred = Q.defer();
       if (options.hasOwnProperty('date') && !validateDate(options.date)) {
-        deferred.reject(new Error('date must be in "YYYY-MM-DD" format'));
-        return deferred.promise;
+        handleError('date must be in "YYYY-MM-DD" format', deferred);
       }
       sendRequest('https://api.nasa.gov/planetary/apod',
         options,
         (err: string, data: object): undefined => {
-          if (err) return deferred.reject(err);
+          if (err) return handleError(err, deferred);
           return deferred.resolve(data);
         }
       );

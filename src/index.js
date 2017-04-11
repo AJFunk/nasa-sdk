@@ -4,6 +4,7 @@ const APOD = require('./apod')();
 const CAD = require('./cad')();
 const Earth = require('./earth')();
 const EONET = require('./eonet')();
+const EPIC = require('./epic')();
 const MarsPhotos = require('./mars-photos')();
 const NEO = require('./neo')();
 const Patents = require('./patents')();
@@ -14,6 +15,7 @@ export {
   CAD,
   Earth,
   EONET,
+  EPIC,
   MarsPhotos,
   NEO,
   Patents,

@@ -1,5 +1,8 @@
 import Q from 'q';
-import { sendRequest } from './util';
+import {
+  sendRequest,
+  handleError,
+} from './util';
 
 export default function eonet(): object {
   return {
@@ -11,7 +14,7 @@ export default function eonet(): object {
       sendRequest(endpoint,
         options,
         (err: string, data: object): undefined => {
-          if (err) return deferred.reject(err);
+          if (err) return handleError(err, deferred);
           return deferred.resolve(data);
         }
       );
@@ -25,7 +28,7 @@ export default function eonet(): object {
       sendRequest(endpoint,
         options,
         (err: string, data: object): undefined => {
-          if (err) return deferred.reject(err);
+          if (err) return handleError(err, deferred);
           return deferred.resolve(data);
         }
       );
@@ -37,7 +40,7 @@ export default function eonet(): object {
       sendRequest('https://eonet.sci.gsfc.nasa.gov/api/v2.1/sources',
         {},
         (err: string, data: object): undefined => {
-          if (err) return deferred.reject(err);
+          if (err) return handleError(err, deferred);
           return deferred.resolve(data);
         }
       );
@@ -51,7 +54,7 @@ export default function eonet(): object {
       sendRequest(endpoint,
         {},
         (err: string, data: object): undefined => {
-          if (err) return deferred.reject(err);
+          if (err) return handleError(err, deferred);
           return deferred.resolve(data);
         }
       );
