@@ -10,11 +10,11 @@ describe('EPIC.fetch()', () => {
   );
 
   it('returns error message', () =>
-    EPIC.fetch().catch((err) => expect(err).to.be.an('error'))
+    EPIC.fetch().catch((err) => expect(err).to.exist)
   );
 
   it('returns error message', () =>
-    EPIC.fetch('naturale').catch((err) => expect(err).to.be.an('error'))
+    EPIC.fetch('naturale').catch((err) => expect(err).to.exist)
   );
 });
 
@@ -28,19 +28,19 @@ describe('EPIC.date()', () => {
   );
 
   it('returns error message', () =>
-    EPIC.date().catch((err) => expect(err).to.be.an('error'))
+    EPIC.date().catch((err) => expect(err).to.exist)
   );
 
   it('returns error message', () =>
-    EPIC.date('natural').catch((err) => expect(err).to.be.an('error'))
+    EPIC.date('natural').catch((err) => expect(err).to.exist)
   );
 
   it('returns error message', () =>
-    EPIC.date('enahnced', '2017-04-10').catch((err) => expect(err).to.be.an('error'))
+    EPIC.date('enahnced', '2017-04-10').catch((err) => expect(err).to.exist)
   );
 
   it('returns error message', () =>
-    EPIC.date('enhanced', '04-10-2017').catch((err) => expect(err).to.be.an('error'))
+    EPIC.date('enhanced', '04-10-2017').catch((err) => expect(err).to.exist)
   );
 });
 
@@ -54,11 +54,11 @@ describe('EPIC.all()', () => {
   );
 
   it('returns error message', () =>
-    EPIC.all().catch((err) => expect(err).to.be.an('error'))
+    EPIC.all().catch((err) => expect(err).to.exist)
   );
 
   it('returns error message', () =>
-    EPIC.all('naturale').catch((err) => expect(err).to.be.an('error'))
+    EPIC.all('naturale').catch((err) => expect(err).to.exist)
   );
 });
 
@@ -72,10 +72,10 @@ describe('EPIC.available()', () => {
   );
 
   it('returns error message', () =>
-    EPIC.available().catch((err) => expect(err).to.be.an('error'))
+    EPIC.available().catch((err) => expect(err).to.exist)
   );
 
   it('returns error message', () =>
-    EPIC.available('naturale').catch((err) => expect(err).to.be.an('error'))
+    EPIC.available('naturale').catch((err) => expect(err).to.exist)
   );
 });

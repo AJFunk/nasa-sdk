@@ -5,6 +5,7 @@
   ],
   "plugins": [
     "transform-flow-strip-types",
-    "add-module-exports"
+    "add-module-exports",
+    "transform-runtime"
   ]
 }

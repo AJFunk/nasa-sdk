@@ -1,23 +1,18 @@
-import Q from 'q';
-import {
-  sendRequest,
-  handleError,
-} from './util';
+import { sendRequest } from './util';
 
 export default function patents(): object {
   return {
 
     fetch(options: object = {}): undefined {
-      const deferred = Q.defer();
-
-      sendRequest('https://api.nasa.gov/patents/content',
-        options,
-        (err: string, data: object): undefined => {
-          if (err) return handleError(err, deferred);
-          return deferred.resolve(data);
-        }
+      return new Promise((resolve: object, reject: object): undefined =>
+        sendRequest('https://api.nasa.gov/patents/content',
+          options,
+          (err: string, data: object): undefined => {
+            if (err) return reject(err);
+            return resolve(data);
+          }
+        )
       );
-      return deferred.promise;
     },
 
   };

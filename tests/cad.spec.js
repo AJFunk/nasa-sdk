@@ -22,13 +22,13 @@ describe('CAD.fetch()', function runTests() {
   );
 
   it('returns error message', () =>
-    CAD.fetch({ 'date-min': '1234' }).catch((err) => expect(err).to.be.an('error'))
+    CAD.fetch({ 'date-min': '1234' }).catch((err) => expect(err).to.exist)
   );
 
   it('returns error message', () =>
     CAD.fetch({
       'date-min': '2015-01-05',
       'date-max': '2015-01-08T12',
-    }).catch((err) => expect(err).to.be.an('error'))
+    }).catch((err) => expect(err).to.exist)
   );
 });

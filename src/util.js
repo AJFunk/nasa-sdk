@@ -23,11 +23,6 @@ const sendRequest = (endpoint: string,
     .catch((err: object): object => cb(err));
 };
 
-const handleError = (message: string, deferred: object): undefined => {
-  deferred.reject(new Error(message));
-  return deferred.promise;
-};
-
 const validateDate = (date: string): boolean => {
   if (!date || typeof date !== 'string') return false;
   return date.match(/^\d{4}-\d{2}-\d{2}$/) !== null;
@@ -39,7 +34,6 @@ const validateDateTime = (date: string): boolean => {
 };
 
 export {
-  handleError,
   sendRequest,
   validateDate,
   validateDateTime,

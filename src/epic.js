@@ -1,8 +1,6 @@
-import Q from 'q';
 import {
   sendRequest,
   validateDate,
-  handleError,
 } from './util';
 
 export default function epic(): object {
@@ -15,64 +13,65 @@ export default function epic(): object {
   return {
 
     fetch(type: string): undefined {
-      const deferred = Q.defer();
-
-      if (!type) return handleError('Image quality type is required', deferred);
-      const validType = validateType(type);
-      if (!validType) return handleError('Invalid image quality type', deferred);
-
-      sendRequest(`https://api.nasa.gov/EPIC/api/${validType}`, {}, (err: string, data: object): undefined => {
-        if (err) return handleError(err, deferred);
-        return deferred.resolve(data);
+      return new Promise((resolve: object, reject: object): undefined => {
+        if (!type) return reject('Image quality type is required');
+        const validType = validateType(type);
+        if (!validType) return reject('Invalid image quality type');
+        return sendRequest(`https://api.nasa.gov/EPIC/api/${validType}`,
+          {},
+          (err: string, data: object): undefined => {
+            if (err) return reject(err);
+            return resolve(data);
+          }
+        );
       });
-      return deferred.promise;
     },
 
     date(type: string, date: string): undefined {
-      const deferred = Q.defer();
-
-      if (!type) return handleError('Image quality type is required', deferred);
-      const validType = validateType(type);
-      if (!validType) return handleError('Invalid image quality type', deferred);
-      if (!date) return handleError('date is required', deferred);
-      if (!validateDate(date)) return handleError('date must be in "YYYY-MM-DD" format', deferred);
-
-      sendRequest(`https://api.nasa.gov/EPIC/api/${type}/date/${date}`,
-        {},
-        (err: string, data: object): undefined => {
-          if (err) return handleError(err, deferred);
-          return deferred.resolve(data);
-        }
-      );
-      return deferred.promise;
+      return new Promise((resolve: object, reject: object): undefined => {
+        if (!type) return reject('Image quality type is required');
+        const validType = validateType(type);
+        if (!validType) return reject('Invalid image quality type');
+        if (!date) return reject('date is required');
+        if (!validateDate(date)) return reject('date must be in "YYYY-MM-DD" format');
+        return sendRequest(`https://api.nasa.gov/EPIC/api/${type}/date/${date}`,
+          {},
+          (err: string, data: object): undefined => {
+            if (err) return reject(err);
+            return resolve(data);
+          }
+        );
+      });
     },
 
     all(type: string): undefined {
-      const deferred = Q.defer();
-
-      if (!type) return handleError('Image quality type is required', deferred);
-      const validType = validateType(type);
-      if (!validType) return handleError('Invalid image quality type', deferred);
-
-      sendRequest(`https://api.nasa.gov/EPIC/api/${type}/all`, {}, (err: string, data: object): undefined => {
-        if (err) return handleError(err, deferred);
-        return deferred.resolve(data);
+      return new Promise((resolve: object, reject: object): undefined => {
+        if (!type) return reject('Image quality type is required');
+        const validType = validateType(type);
+        if (!validType) return reject('Invalid image quality type');
+        return sendRequest(`https://api.nasa.gov/EPIC/api/${type}/all`,
+          {},
+          (err: string, data: object): undefined => {
+            if (err) return reject(err);
+            return resolve(data);
+          }
+        );
       });
-      return deferred.promise;
     },
 
     available(type: string): undefined {
-      const deferred = Q.defer();
-
-      if (!type) return handleError('Image quality type is required', deferred);
-      const validType = validateType(type);
-      if (!validType) return handleError('Invalid image quality type', deferred);
-
-      sendRequest(`https://api.nasa.gov/EPIC/api/${type}/available`, {}, (err: string, data: object): undefined => {
-        if (err) return handleError(err, deferred);
-        return deferred.resolve(data);
+      return new Promise((resolve: object, reject: object): undefined => {
+        if (!type) return reject('Image quality type is required');
+        const validType = validateType(type);
+        if (!validType) return reject('Invalid image quality type');
+        return sendRequest(`https://api.nasa.gov/EPIC/api/${type}/available`,
+          {},
+          (err: string, data: object): undefined => {
+            if (err) return reject(err);
+            return resolve(data);
+          }
+        );
       });
-      return deferred.promise;
     },
 
   };
