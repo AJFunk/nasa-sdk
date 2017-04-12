@@ -14,7 +14,9 @@
   },
   "license": "MIT",
   "scripts": {
-    "test": "mocha --timeout 8000 tests/* --compilers js:babel-register --require ./tests/helper.js --recursive",
+    "test": "npm run test-source && npm run test-build",
+    "test-source": "export TEST_PATH=src && mocha --timeout 8000 tests/* --compilers js:babel-register --require ./tests/helper.js --recursive",
+    "test-build": "export TEST_PATH=lib && mocha --timeout 8000 tests/* --compilers js:babel-register --require ./tests/helper.js --recursive",
     "start": "babel-node ./src/index.js",
     "lint": "eslint --ext .js ./",
     "build": "npm run lint && babel src -d lib"
@@ -35,8 +37,7 @@
     "eslint-plugin-babel": "^3.2.0",
     "eslint-plugin-flow-vars": "^0.5.0",
     "eslint-plugin-flowtype": "^2.4.0",
-    "mocha": "^2.4.5",
-    "pretty-error": "^2.0.0"
+    "mocha": "^2.4.5"
   },
   "dependencies": {},
   "bugs": {

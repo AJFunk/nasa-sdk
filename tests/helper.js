@@ -8,4 +8,4 @@ import path from 'path';
 global.expect = expect;
 global.assert = assert;
 
-addPath(path.resolve(__dirname, '../src'));
+addPath(path.resolve(__dirname, `../${process.env.TEST_PATH}`));
