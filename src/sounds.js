@@ -5,7 +5,9 @@ export default function sounds(): object {
 
     fetch(options: object = {}): undefined {
       return new Promise((resolve: object, reject: object): undefined =>
-        sendRequest('https://api.nasa.gov/planetary/sounds',
+        sendRequest(
+          'api.nasa.gov',
+          '/planetary/sounds',
           options,
           (err: string, data: object): undefined => {
             if (err) return reject(err);

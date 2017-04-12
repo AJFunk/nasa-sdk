@@ -26,7 +26,9 @@ export default function cad(): object {
             }
           }
         }
-        return sendRequest('https://ssd-api.jpl.nasa.gov/cad.api',
+        return sendRequest(
+          'ssd-api.jpl.nasa.gov',
+          '/cad.api',
           Object.assign({}, options, optionOverrides),
           (err: string, data: object): undefined => {
             if (err) return reject(err);

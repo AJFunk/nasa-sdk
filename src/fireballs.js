@@ -19,7 +19,9 @@ export default function fireballs(): object {
             return reject('date-max is not in a valid format.');
           }
         }
-        return sendRequest('https://ssd-api.jpl.nasa.gov/fireball.api',
+        return sendRequest(
+          'ssd-api.jpl.nasa.gov',
+          '/fireball.api',
           options,
           (err: string, data: object): undefined => {
             if (err) return reject(err);

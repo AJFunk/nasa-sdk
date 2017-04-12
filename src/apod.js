@@ -11,7 +11,9 @@ export default function apod(): object {
         if (options.hasOwnProperty('date') && !validateDate(options.date)) {
           return reject('date must be in "YYYY-MM-DD" format');
         }
-        return sendRequest('https://api.nasa.gov/planetary/apod',
+        return sendRequest(
+          'api.nasa.gov',
+          '/planetary/apod',
           options,
           (err: string, data: object): undefined => {
             if (err) return reject(err);

@@ -17,7 +17,9 @@ export default function epic(): object {
         if (!type) return reject('Image quality type is required');
         const validType = validateType(type);
         if (!validType) return reject('Invalid image quality type');
-        return sendRequest(`https://api.nasa.gov/EPIC/api/${validType}`,
+        return sendRequest(
+          'api.nasa.gov',
+          `/EPIC/api/${validType}`,
           {},
           (err: string, data: object): undefined => {
             if (err) return reject(err);
@@ -34,7 +36,9 @@ export default function epic(): object {
         if (!validType) return reject('Invalid image quality type');
         if (!date) return reject('date is required');
         if (!validateDate(date)) return reject('date must be in "YYYY-MM-DD" format');
-        return sendRequest(`https://api.nasa.gov/EPIC/api/${type}/date/${date}`,
+        return sendRequest(
+          'api.nasa.gov',
+          `/EPIC/api/${type}/date/${date}`,
           {},
           (err: string, data: object): undefined => {
             if (err) return reject(err);
@@ -49,7 +53,9 @@ export default function epic(): object {
         if (!type) return reject('Image quality type is required');
         const validType = validateType(type);
         if (!validType) return reject('Invalid image quality type');
-        return sendRequest(`https://api.nasa.gov/EPIC/api/${type}/all`,
+        return sendRequest(
+          'api.nasa.gov',
+          `/EPIC/api/${type}/all`,
           {},
           (err: string, data: object): undefined => {
             if (err) return reject(err);
@@ -64,7 +70,9 @@ export default function epic(): object {
         if (!type) return reject('Image quality type is required');
         const validType = validateType(type);
         if (!validType) return reject('Invalid image quality type');
-        return sendRequest(`https://api.nasa.gov/EPIC/api/${type}/available`,
+        return sendRequest(
+          'api.nasa.gov',
+          `/EPIC/api/${type}/available`,
           {},
           (err: string, data: object): undefined => {
             if (err) return reject(err);

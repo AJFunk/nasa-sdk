@@ -2,46 +2,31 @@ import { Earth } from 'index';
 
 describe('Earth.imagery()', () => {
   it('returns object', () =>
-    Earth.imagery().then((data) => expect(data).to.be.instanceof(Object))
+    Earth.imagery().then(data => expect(data).to.be.instanceof(Object))
   );
 
-  it('returns object', () => {
+  it('returns object', () =>
     Earth.imagery({
       lon: 100.75,
       lat: 1.5,
       date: '2014-02-01',
       cloud_score: true,
-    }).then((data) => expect(data).to.be.instanceof(Object));
-  });
-
-  it('returns specific Earth Imagery object', () => {
-    const earthImageryObj = {
-      date: '2014-02-04T03:30:01',
-      url: 'https://earthengine.googleapis.com/api/thumb?thumbid=2945b5e5775aa438ce0e2b0750febcd5&token=9cee7d98a4ddd6d8bafaafa1fbb7ec2d',
-      cloud_score: 0.03890583615451812,
-      id: 'LC8_L1T_TOA/LC81270592014035LGN00',
-    };
-    Earth.imagery({
-      lon: 100.75,
-      lat: 1.5,
-      date: '2014-02-01',
-      cloud_score: true,
-    }).then((data) => assert.deepEqual(data, earthImageryObj));
-  });
+    }).then(data => expect(data).to.be.instanceof(Object))
+  );
 });
 
 describe('Earth.assets()', () => {
   it('returns object', () =>
-    Earth.assets().then((data) => expect(data).to.be.instanceof(Object))
+    Earth.assets().then(data => expect(data).to.be.instanceof(Object))
   );
 
-  it('returns object', () => {
+  it('returns object', () =>
     Earth.assets({
       lon: 100.75,
       lat: 1.5,
       begin: '2014-02-01',
-    }).then((data) => expect(data).to.be.instanceof(Object));
-  });
+    }).then(data => expect(data).to.be.instanceof(Object))
+  );
 
   it('returns a specific Earth Asset object', () => {
     const earthAssetObj = {
@@ -313,11 +298,11 @@ describe('Earth.assets()', () => {
         },
       ],
     };
-    Earth.assets({
+    return Earth.assets({
       lon: 100.75,
       lat: 1.5,
       begin: '2014-02-01',
       end: '2017-04-09',
-    }).then((data) => assert.deepEqual(data, earthAssetObj));
+    }).then(data => assert.deepEqual(data, earthAssetObj));
   });
 });

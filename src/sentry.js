@@ -5,7 +5,9 @@ export default function sentry(): object {
 
     fetch(options: object = {}): undefined {
       return new Promise((resolve: object, reject: object): undefined =>
-        sendRequest('https://ssd-api.jpl.nasa.gov/sentry.api',
+        sendRequest(
+          'ssd-api.jpl.nasa.gov',
+          '/sentry.api',
           options,
           (err: string, data: object): undefined => {
             if (err) return reject(err);

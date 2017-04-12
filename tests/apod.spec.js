@@ -2,11 +2,11 @@ import { APOD } from 'index';
 
 describe('APOD.fetch()', () => {
   it('returns object', () =>
-    APOD.fetch().then((data) => expect(data).to.be.instanceof(Object))
+    APOD.fetch().then(data => expect(data).to.be.instanceof(Object))
   );
 
   it('returns object', () =>
-    APOD.fetch({ date: '2016-06-01' }).then((data) => expect(data).to.be.instanceof(Object))
+    APOD.fetch({ date: '2016-06-01' }).then(data => expect(data).to.be.instanceof(Object))
   );
 
   it('returns specific APOD object', () => {
@@ -30,6 +30,6 @@ describe('APOD.fetch()', () => {
       title: 'Tycho\'s Supernova Remnant Expands',
       url: 'https://www.youtube.com/embed/jOmb-STnOg4?rel=0',
     };
-    return APOD.fetch({ date: '2016-06-01' }).then((data) => assert.deepEqual(data, apodObj));
+    return APOD.fetch({ date: '2016-06-01' }).then(data => assert.deepEqual(data, apodObj));
   });
 });

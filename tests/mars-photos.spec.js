@@ -2,7 +2,7 @@ import { MarsPhotos } from 'index';
 
 describe('MarsPhotos.fetch()', () => {
   it('returns object', () =>
-    MarsPhotos.fetch('curiosity', { sol: 5 }).then((data) =>
+    MarsPhotos.fetch('curiosity', { sol: 5 }).then(data =>
       expect(data).to.be.instanceof(Object))
   );
 
@@ -10,7 +10,7 @@ describe('MarsPhotos.fetch()', () => {
     MarsPhotos.fetch('curiosity', {
       camera: 'fhaz',
       earth_date: '2016-03-12',
-    }).then((data) => expect(data).to.be.instanceof(Object))
+    }).then(data => expect(data).to.be.instanceof(Object))
   );
 
   it('returns object', () =>
@@ -18,28 +18,28 @@ describe('MarsPhotos.fetch()', () => {
       camera: 'navcam',
       earth_date: '2016-03-12',
       page: 2,
-    }).then((data) => expect(data).to.be.instanceof(Object))
+    }).then(data => expect(data).to.be.instanceof(Object))
   );
 
   it('returns error message', () =>
-    MarsPhotos.fetch().catch((err) => expect(err).toexist)
+    MarsPhotos.fetch().catch(err => expect(err).toexist)
   );
 
   it('returns error message', () =>
-    MarsPhotos.fetch('curiosity').catch((err) => expect(err).toexist)
+    MarsPhotos.fetch('curiosity').catch(err => expect(err).toexist)
   );
 
   it('returns error message', () =>
-    MarsPhotos.fetch('badrover').catch((err) => expect(err).toexist)
+    MarsPhotos.fetch('badrover').catch(err => expect(err).toexist)
   );
 
   it('returns error message', () =>
-    MarsPhotos.fetch('curiosity', { camera: 'pancam' }).catch((err) =>
+    MarsPhotos.fetch('curiosity', { camera: 'pancam' }).catch(err =>
       expect(err).toexist)
   );
 
   it('returns error message', () =>
-    MarsPhotos.fetch('curiosity', { earth_date: '1234' }).catch((err) =>
+    MarsPhotos.fetch('curiosity', { earth_date: '1234' }).catch(err =>
       expect(err).toexist)
   );
 });

@@ -14,7 +14,9 @@ export default function neo(): object {
         if (options.hasOwnProperty('end_date') && !validateDate(options.end_date)) {
           return reject('end_date must be in "YYYY-MM-DD" format');
         }
-        return sendRequest('https://api.nasa.gov/neo/rest/v1/feed',
+        return sendRequest(
+          'api.nasa.gov',
+          '/neo/rest/v1/feed',
           options,
           (err: string, data: object): undefined => {
             if (err) return reject(err);
@@ -26,7 +28,9 @@ export default function neo(): object {
 
     feedToday(options: object = {}): undefined {
       return new Promise((resolve: object, reject: object): undefined =>
-        sendRequest('https://api.nasa.gov/neo/rest/v1/feed/today',
+        sendRequest(
+          'api.nasa.gov',
+          '/neo/rest/v1/feed/today',
           options,
           (err: string, data: object): undefined => {
             if (err) return reject(err);
@@ -39,7 +43,9 @@ export default function neo(): object {
     fetch(asteroidId: string): undefined {
       return new Promise((resolve: object, reject: object): undefined => {
         if (!asteroidId) return reject('asteroidId is required');
-        return sendRequest(`https://api.nasa.gov/neo/rest/v1/neo/${asteroidId}`,
+        return sendRequest(
+          'api.nasa.gov',
+          `/neo/rest/v1/neo/${asteroidId}`,
           {},
           (err: string, data: object): undefined => {
             if (err) return reject(err);
@@ -51,7 +57,9 @@ export default function neo(): object {
 
     browse(options: object = {}): undefined {
       return new Promise((resolve: object, reject: object): undefined =>
-        sendRequest('https://api.nasa.gov/neo/rest/v1/neo/browse',
+        sendRequest(
+          'api.nasa.gov',
+          '/neo/rest/v1/neo/browse',
           options,
           (err: string, data: object): undefined => {
             if (err) return reject(err);
@@ -63,7 +71,9 @@ export default function neo(): object {
 
     stats(): undefined {
       return new Promise((resolve: object, reject: object): undefined =>
-        sendRequest('https://api.nasa.gov/neo/rest/v1/stats',
+        sendRequest(
+          'api.nasa.gov',
+          '/neo/rest/v1/stats',
           {},
           (err: string, data: object): undefined => {
             if (err) return reject(err);

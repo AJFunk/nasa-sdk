@@ -1,7 +1,8 @@
-import axios from 'axios';
+import https from 'https';
 import { apiKey } from './config';
 
-const sendRequest = (endpoint: string,
+const sendRequest = (baseurl: string,
+                     endpoint: string,
                      options: object = {},
                      cb: object,
                      noKey: boolean): undefined => {
@@ -17,10 +18,24 @@ const sendRequest = (endpoint: string,
   }
   if (apiKey && !noKey) url = `${url}api_key=${apiKey}`;
   if (url[url.length - 1] === '&') url = url.substr(0, url.length - 1);
-  return axios
-    .get(url)
-    .then((res: object): object => cb(null, res.data))
-    .catch((err: object): object => cb(err));
+
+  const params = {
+    host: baseurl,
+    path: url,
+    method: 'GET',
+  };
+
+  const req = https.request(params, (res: object): null => {
+    if (res.statusCode < 200 || res.statusCode >= 300) {
+      return cb(`statusCode=${res.statusCode}`);
+    }
+    const buf = [];
+    res.on('data', (c: object): object => buf.push(c));
+    res.on('end', (): object => cb(null, JSON.parse(Buffer.concat(buf))));
+    return null;
+  });
+  req.on('error', (err: object): object => cb(err));
+  req.end();
 };
 
 const validateDate = (date: string): boolean => {

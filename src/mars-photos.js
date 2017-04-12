@@ -38,7 +38,9 @@ export default function marsPhotos(): object {
         if (options.hasOwnProperty('earth_date') && !validateDate(options.earth_date)) {
           return reject('earth_date must be in "YYYY-MM-DD" format');
         }
-        return sendRequest(`https://api.nasa.gov/mars-photos/api/v1/rovers/${validRover}/photos`,
+        return sendRequest(
+          'api.nasa.gov',
+          `/mars-photos/api/v1/rovers/${validRover}/photos`,
           Object.assign({}, options, { camera: validCamera }),
           (err: string, data: object): undefined => {
             if (err) return reject(err);
@@ -53,7 +55,9 @@ export default function marsPhotos(): object {
         if (!rover) return reject('Rover name is required');
         const validRover = validateRover(rover);
         if (!validRover) return reject('Invalid rover name');
-        return sendRequest(`https://api.nasa.gov/mars-photos/api/v1/manifests/${validRover}`,
+        return sendRequest(
+          'api.nasa.gov',
+          `/mars-photos/api/v1/manifests/${validRover}`,
           {},
           (err: string, data: object): undefined => {
             if (err) return reject(err);

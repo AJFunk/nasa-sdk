@@ -5,9 +5,11 @@ export default function eonet(): object {
 
     events(options: object = {}): undefined {
       return new Promise((resolve: object, reject: object): undefined => {
-        let endpoint = 'https://eonet.sci.gsfc.nasa.gov/api/v2.1/events';
+        let endpoint = '/api/v2.1/events';
         if (options.hasOwnProperty('eventId')) endpoint = `${endpoint}/${options.eventId}`;
-        return sendRequest(endpoint,
+        return sendRequest(
+          'eonet.sci.gsfc.nasa.gov',
+          endpoint,
           options,
           (err: string, data: object): undefined => {
             if (err) return reject(err);
@@ -19,9 +21,11 @@ export default function eonet(): object {
 
     categories(options: object = {}): undefined {
       return new Promise((resolve: object, reject: object): undefined => {
-        let endpoint = 'https://eonet.sci.gsfc.nasa.gov/api/v2.1/categories';
+        let endpoint = '/api/v2.1/categories';
         if (options.hasOwnProperty('categoryId')) endpoint = `${endpoint}/${options.categoryId}`;
-        return sendRequest(endpoint,
+        return sendRequest(
+          'eonet.sci.gsfc.nasa.gov',
+          endpoint,
           options,
           (err: string, data: object): undefined => {
             if (err) return reject(err);
@@ -33,7 +37,9 @@ export default function eonet(): object {
 
     sources(): undefined {
       return new Promise((resolve: object, reject: object): undefined =>
-        sendRequest('https://eonet.sci.gsfc.nasa.gov/api/v2.1/sources',
+        sendRequest(
+          'eonet.sci.gsfc.nasa.gov',
+          '/api/v2.1/sources',
           {},
           (err: string, data: object): undefined => {
             if (err) return reject(err);
@@ -45,9 +51,11 @@ export default function eonet(): object {
 
     layers(options: object = {}): undefined {
       return new Promise((resolve: object, reject: object): undefined => {
-        let endpoint = 'https://eonet.sci.gsfc.nasa.gov/api/v2.1/layers';
+        let endpoint = '/api/v2.1/layers';
         if (options.hasOwnProperty('categoryId')) endpoint = `${endpoint}/${options.categoryId}`;
-        sendRequest(endpoint,
+        sendRequest(
+          'eonet.sci.gsfc.nasa.gov',
+          endpoint,
           {},
           (err: string, data: object): undefined => {
             if (err) return reject(err);
