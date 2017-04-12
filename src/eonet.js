@@ -12,7 +12,7 @@ export default function eonet(): object {
           endpoint,
           options,
           (err: string, data: object): undefined => {
-            if (err) return reject(err);
+            if (err) return reject(new Error(err));
             return resolve(data);
           }
         );
@@ -28,7 +28,7 @@ export default function eonet(): object {
           endpoint,
           options,
           (err: string, data: object): undefined => {
-            if (err) return reject(err);
+            if (err) return reject(new Error(err));
             return resolve(data);
           }
         );
@@ -42,7 +42,7 @@ export default function eonet(): object {
           '/api/v2.1/sources',
           {},
           (err: string, data: object): undefined => {
-            if (err) return reject(err);
+            if (err) return reject(new Error(err));
             return resolve(data);
           }
         )
@@ -58,7 +58,7 @@ export default function eonet(): object {
           endpoint,
           {},
           (err: string, data: object): undefined => {
-            if (err) return reject(err);
+            if (err) return reject(new Error(err));
             return resolve(data);
           }
         );

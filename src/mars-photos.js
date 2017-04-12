@@ -24,26 +24,26 @@ export default function marsPhotos(): object {
 
     fetch(rover: string, options: object = {}): undefined {
       return new Promise((resolve: object, reject: object): undefined => {
-        if (!rover) return reject('Rover name is required');
+        if (!rover) return reject(new Error('Rover name is required'));
         const validRover = validateRover(rover);
-        if (!validRover) return reject('Invalid rover name');
+        if (!validRover) return reject(new Error('Invalid rover name'));
         let validCamera;
         if (options.hasOwnProperty('camera')) {
           validCamera = validateCamera(validRover, options.camera);
-          if (!validCamera) return reject('Invalid camera name');
+          if (!validCamera) return reject(new Error('Invalid camera name'));
         }
         if (!options.hasOwnProperty('sol') && !options.hasOwnProperty('earth_date')) {
-          return reject('You must provide either earth_date or sol');
+          return reject(new Error('You must provide either earth_date or sol'));
         }
         if (options.hasOwnProperty('earth_date') && !validateDate(options.earth_date)) {
-          return reject('earth_date must be in "YYYY-MM-DD" format');
+          return reject(new Error('earth_date must be in "YYYY-MM-DD" format'));
         }
         return sendRequest(
           'api.nasa.gov',
           `/mars-photos/api/v1/rovers/${validRover}/photos`,
           Object.assign({}, options, { camera: validCamera }),
           (err: string, data: object): undefined => {
-            if (err) return reject(err);
+            if (err) return reject(new Error(err));
             return resolve(data);
           }
         );
@@ -52,15 +52,15 @@ export default function marsPhotos(): object {
 
     manifest(rover: string): undefined {
       return new Promise((resolve: object, reject: object): undefined => {
-        if (!rover) return reject('Rover name is required');
+        if (!rover) return reject(new Error('Rover name is required'));
         const validRover = validateRover(rover);
-        if (!validRover) return reject('Invalid rover name');
+        if (!validRover) return reject(new Error('Invalid rover name'));
         return sendRequest(
           'api.nasa.gov',
           `/mars-photos/api/v1/manifests/${validRover}`,
           {},
           (err: string, data: object): undefined => {
-            if (err) return reject(err);
+            if (err) return reject(new Error(err));
             return resolve(data);
           }
         );

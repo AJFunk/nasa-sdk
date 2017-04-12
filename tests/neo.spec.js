@@ -17,7 +17,7 @@ describe('NEO.fetch()', () => {
     NEO.fetch('3729835').then(data => expect(data).to.be.instanceof(Object))
   );
   it('returns error message', () =>
-    NEO.fetch().catch(err => expect(err).toexist)
+    NEO.fetch().catch(err => expect(err).to.be.an('error'))
   );
 });
 

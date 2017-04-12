@@ -10,7 +10,7 @@ export default function sentry(): object {
           '/sentry.api',
           options,
           (err: string, data: object): undefined => {
-            if (err) return reject(err);
+            if (err) return reject(new Error(err));
             return resolve(data);
           },
           true

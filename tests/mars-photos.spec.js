@@ -22,24 +22,24 @@ describe('MarsPhotos.fetch()', () => {
   );
 
   it('returns error message', () =>
-    MarsPhotos.fetch().catch(err => expect(err).toexist)
+    MarsPhotos.fetch().catch(err => expect(err).to.be.an('error'))
   );
 
   it('returns error message', () =>
-    MarsPhotos.fetch('curiosity').catch(err => expect(err).toexist)
+    MarsPhotos.fetch('curiosity').catch(err => expect(err).to.be.an('error'))
   );
 
   it('returns error message', () =>
-    MarsPhotos.fetch('badrover').catch(err => expect(err).toexist)
+    MarsPhotos.fetch('badrover').catch(err => expect(err).to.be.an('error'))
   );
 
   it('returns error message', () =>
     MarsPhotos.fetch('curiosity', { camera: 'pancam' }).catch(err =>
-      expect(err).toexist)
+      expect(err).to.be.an('error'))
   );
 
   it('returns error message', () =>
     MarsPhotos.fetch('curiosity', { earth_date: '1234' }).catch(err =>
-      expect(err).toexist)
+      expect(err).to.be.an('error'))
   );
 });

@@ -17,17 +17,17 @@ describe('Fireballs.fetch()', () => {
     Fireballs.fetch({
       'date-min': 'now',
       'date-max': '+20',
-    }).catch(err => expect(err).toexist)
+    }).catch(err => expect(err).to.be.an('error'))
   );
 
   it('returns error message', () =>
-    Fireballs.fetch({ 'date-min': '1234' }).catch(err => expect(err).toexist)
+    Fireballs.fetch({ 'date-min': '1234' }).catch(err => expect(err).to.be.an('error'))
   );
 
   it('returns error message', () =>
     Fireballs.fetch({
       'date-min': '2015-01-05',
       'date-max': '2015-01-08T12',
-    }).catch(err => expect(err).toexist)
+    }).catch(err => expect(err).to.be.an('error'))
   );
 });

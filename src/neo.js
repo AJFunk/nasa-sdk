@@ -9,17 +9,17 @@ export default function neo(): object {
     feed(options: object = {}): undefined {
       return new Promise((resolve: object, reject: object): undefined => {
         if (options.hasOwnProperty('start_date') && !validateDate(options.start_date)) {
-          return reject('start_date must be in "YYYY-MM-DD" format');
+          return reject(new Error('start_date must be in "YYYY-MM-DD" format'));
         }
         if (options.hasOwnProperty('end_date') && !validateDate(options.end_date)) {
-          return reject('end_date must be in "YYYY-MM-DD" format');
+          return reject(new Error('end_date must be in "YYYY-MM-DD" format'));
         }
         return sendRequest(
           'api.nasa.gov',
           '/neo/rest/v1/feed',
           options,
           (err: string, data: object): undefined => {
-            if (err) return reject(err);
+            if (err) return reject(new Error(err));
             return resolve(data);
           }
         );
@@ -33,7 +33,7 @@ export default function neo(): object {
           '/neo/rest/v1/feed/today',
           options,
           (err: string, data: object): undefined => {
-            if (err) return reject(err);
+            if (err) return reject(new Error(err));
             return resolve(data);
           }
         )
@@ -42,13 +42,13 @@ export default function neo(): object {
 
     fetch(asteroidId: string): undefined {
       return new Promise((resolve: object, reject: object): undefined => {
-        if (!asteroidId) return reject('asteroidId is required');
+        if (!asteroidId) return reject(new Error('asteroidId is required'));
         return sendRequest(
           'api.nasa.gov',
           `/neo/rest/v1/neo/${asteroidId}`,
           {},
           (err: string, data: object): undefined => {
-            if (err) return reject(err);
+            if (err) return reject(new Error(err));
             return resolve(data);
           }
         );
@@ -62,7 +62,7 @@ export default function neo(): object {
           '/neo/rest/v1/neo/browse',
           options,
           (err: string, data: object): undefined => {
-            if (err) return reject(err);
+            if (err) return reject(new Error(err));
             return resolve(data);
           }
         )
@@ -76,7 +76,7 @@ export default function neo(): object {
           '/neo/rest/v1/stats',
           {},
           (err: string, data: object): undefined => {
-            if (err) return reject(err);
+            if (err) return reject(new Error(err));
             return resolve(data);
           }
         )

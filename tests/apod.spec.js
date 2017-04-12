@@ -9,6 +9,10 @@ describe('APOD.fetch()', () => {
     APOD.fetch({ date: '2016-06-01' }).then(data => expect(data).to.be.instanceof(Object))
   );
 
+  it('returns object', () =>
+    APOD.fetch({ date: '2016-0' }).catch(err => expect(err).to.be.an('error'))
+  );
+
   it('returns specific APOD object', () => {
     const apodObj = {
       date: '2016-06-01',

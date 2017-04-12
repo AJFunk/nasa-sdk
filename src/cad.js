@@ -13,7 +13,7 @@ export default function cad(): object {
         if (options.hasOwnProperty('date-min')) {
           if (!validateDate(options['date-min']) && !validateDateTime(options['date-min'])) {
             if (options['date-min'] !== 'now') {
-              return reject('date-min is not in a valid format.');
+              return reject(new Error('date-min is not in a valid format.'));
             }
           }
         }
@@ -22,7 +22,7 @@ export default function cad(): object {
             if (options['date-max'].match(/^[+]\d+$/)) {
               optionOverrides['date-max'] = options['date-max'].replace(/[+]/, '%2B');
             } else if (options['date-max'] !== 'now') {
-              return reject('date-max is not in a valid format.');
+              return reject(new Error('date-max is not in a valid format.'));
             }
           }
         }
@@ -31,7 +31,7 @@ export default function cad(): object {
           '/cad.api',
           Object.assign({}, options, optionOverrides),
           (err: string, data: object): undefined => {
-            if (err) return reject(err);
+            if (err) return reject(new Error(err));
             return resolve(data);
           },
           true
