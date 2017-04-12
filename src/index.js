@@ -10,6 +10,7 @@ const MarsPhotos = require('./mars-photos')();
 const NEO = require('./neo')();
 const NHATS = require('./nhats')();
 const Patents = require('./patents')();
+const Scout = require('./scout')();
 const Sentry = require('./sentry')();
 const Sounds = require('./sounds')();
 
@@ -24,6 +25,7 @@ export {
   NEO,
   NHATS,
   Patents,
+  Scout,
   Sentry,
   Sounds,
   setNasaApiKey,

@@ -24,7 +24,9 @@ import {
   Fireballs,
   MarsPhotos,
   NEO,
+  NHATS,
   Patents,
+  Scout,
   Sentry,
   Sounds,
 } from 'nasa-sdk';
@@ -85,6 +87,9 @@ Be sure to reference [NASA's API docs](https://api.nasa.gov/api.html)
 
 ## Patents - NASA's Patent Portfolio
 * [Patents.fetch()](#patents-fetch)
+
+## Scout - Trajectory Analysis and Hazard Assessment for Recently Detected Objects on the Minor Planet Center’s NEOCP
+* [Scout.fetch()](#scout-fetch)
 
 ## Sentry - Earth Impact Monitoring
 * [Sentry.fetch()](#sentry-fetch)
@@ -555,6 +560,38 @@ Patents
   .fetch({
     query: 'temperature',
     concept_tags: true,
+  })
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+```
+
+<h3 id="scout-fetch">Scout.fetch(options)</h3>
+
+Returns a list of Near-Earth Objects (NEOs) with trajectory analysis and hazard assessment for recently detected objects on the Minor Planet Center’s Near-Earth Object Confirmation Page (NEOCP).
+
+The Scout API employs various "modes" to obtain required data. This results in restrictions on the combination of options you can use in a single request. For detailed information on this, refer the the [API Documentation](https://ssd-api.jpl.nasa.gov/doc/scout.html)
+
+##### `options` (optional) - **[Object]**
+* `tdes` - **[String]** Select data for the NEOCP object matching this temporary designation (e.g., `P10uUSw`)
+* `plot` - **[String]** Get plot files for the specified NEOCP object of the selected type (`el`=elements, `ca`=close-approach, `sr`=systematic-ranging). Multiple values may be passed with a `:` delimiter. For example, `ca:el`. Results are Base64-encoded image data.
+* `file` - **[String]** Get the list of available data files (when file=`list`) or get the requested data file for the specified NEOCP object.
+* `orbits` - **[Boolean]** Get sampled orbits data for the specified NEOCP object
+* `n-orbits` - **[Number]** Limit the number of sampled orbits to this value. Must be in the range `[1:1000]`
+* `eph-start` - **[String]** Get the ephemeris for the specified NEOCP object at this time UTC. See API Docs for valid Date/Time formats
+* `eph-stop` - **[String]** Set the ephemeris stop-time (if specified, requires `eph-start` and must be later than `eph-start`). See API Docs for valid Date/Time formats
+* `eph-step` - **[String]** Set the ephemeris step-size (if specified, requires both `eph-start` and `eph-stop`; if not specified, set to the span). Valid formats are `#d`, `#h`, `#m` (where `#` is a positive definite integer)
+* `obs-code` - **[String]** Get the ephemeris for the specified NEOCP object relative to the specified MPC observatory code. Must be a valid MPC code
+* `fov-diam` - **[Number]** Specify the size (diameter) of the field-of-view in arc-minutes. Must be in the range `(0:1800]`
+* `fov-ra` - **[String]** Specify the field-of-view center (R.A. component) [requires `fov-diam` and `fov-dec`; invalid if `eph-stop` is set]. See API Docs for valid formats
+* `fov-dec` - **[String]** specify the field-of-view center (Dec. component) [requires `fov-diam` and `fov-ra`; invalid if `eph-stop` is set]. See API Docs for valid formats
+* `fov-vmag` - **[Number]** Filter ephemeris results to those with V-magnitude of this value or brighter [requires `fov-diam`]. Must be in the range `[0:40]`
+
+
+```javascript
+Scout
+  .fetch({
+    plot: 'el',
+    orbits: true,
   })
   .then(data => console.log(data))
   .catch(err => console.log(err));
