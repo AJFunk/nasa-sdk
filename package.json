@@ -18,7 +18,8 @@
     "test-source": "export TEST_PATH=src && mocha --timeout 8000 tests/* --compilers js:babel-register --require ./tests/helper.js --recursive",
     "start": "babel-node ./src/index.js",
     "lint": "eslint --ext .js ./",
-    "build": "npm run lint && babel src -d lib"
+    "build": "npm run lint && babel src -d lib",
+    "flow": "flow"
   },
   "devDependencies": {
     "app-module-path": "^1.0.6",
