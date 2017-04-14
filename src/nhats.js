@@ -1,3 +1,4 @@
+// @flow
 import { sendRequest } from './util';
 
 export default function nhats(): object {

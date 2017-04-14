@@ -1,3 +1,4 @@
+// @flow
 import https from 'https';
 import { apiKey } from './config';
 

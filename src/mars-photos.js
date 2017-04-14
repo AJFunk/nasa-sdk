@@ -1,3 +1,4 @@
+// @flow
 import {
   sendRequest,
   validateDate,
