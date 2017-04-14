@@ -4,11 +4,11 @@ import {
   validateDate,
 } from './util';
 
-export default function neo(): object {
+export default function neo(): Object {
   return {
 
-    feed(options: object = {}): undefined {
-      return new Promise((resolve: object, reject: object): undefined => {
+    feed: (options: Object = {}): Promise<any> =>
+      new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
         if (options.hasOwnProperty('start_date') && !validateDate(options.start_date)) {
           return reject(new Error('start_date must be in "YYYY-MM-DD" format'));
         }
@@ -19,70 +19,65 @@ export default function neo(): object {
           'api.nasa.gov',
           '/neo/rest/v1/feed',
           options,
-          (err: string, data: object): undefined => {
-            if (err) return reject(new Error(err));
-            return resolve(data);
+          (err: Error | null, data?: Object): mixed => {
+            if (err) return reject(err);
+            return data ? resolve(data) : reject(new Error('No data found'));
           }
         );
-      });
-    },
+      }),
 
-    feedToday(options: object = {}): undefined {
-      return new Promise((resolve: object, reject: object): undefined =>
+    feedToday: (options: Object = {}): Promise<any> =>
+      new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed =>
         sendRequest(
           'api.nasa.gov',
           '/neo/rest/v1/feed/today',
           options,
-          (err: string, data: object): undefined => {
-            if (err) return reject(new Error(err));
-            return resolve(data);
+          (err: Error | null, data?: Object): mixed => {
+            if (err) return reject(err);
+            return data ? resolve(data) : reject(new Error('No data found'));
           }
         )
-      );
-    },
+      ),
 
-    fetch(asteroidId: string): undefined {
-      return new Promise((resolve: object, reject: object): undefined => {
+    fetch: (asteroidId: string): Promise<any> =>
+      new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
         if (!asteroidId) return reject(new Error('asteroidId is required'));
         return sendRequest(
           'api.nasa.gov',
           `/neo/rest/v1/neo/${asteroidId}`,
           {},
-          (err: string, data: object): undefined => {
-            if (err) return reject(new Error(err));
-            return resolve(data);
+          (err: Error | null, data?: Object): mixed => {
+            if (err) return reject(err);
+            return data ? resolve(data) : reject(new Error('No data found'));
           }
         );
-      });
-    },
+      }),
 
-    browse(options: object = {}): undefined {
-      return new Promise((resolve: object, reject: object): undefined =>
+    browse: (options: Object = {}): Promise<any> =>
+      new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed =>
         sendRequest(
           'api.nasa.gov',
           '/neo/rest/v1/neo/browse',
           options,
-          (err: string, data: object): undefined => {
-            if (err) return reject(new Error(err));
-            return resolve(data);
+          (err: Error | null, data?: Object): mixed => {
+            if (err) return reject(err);
+            return data ? resolve(data) : reject(new Error('No data found'));
           }
         )
-      );
-    },
+      ),
 
-    stats(): undefined {
-      return new Promise((resolve: object, reject: object): undefined =>
+    stats: (): Promise<any> =>
+      new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed =>
         sendRequest(
           'api.nasa.gov',
           '/neo/rest/v1/stats',
           {},
-          (err: string, data: object): undefined => {
-            if (err) return reject(new Error(err));
-            return resolve(data);
+          (err: Error | null, data?: Object): mixed => {
+            if (err) return reject(err);
+            return data ? resolve(data) : reject(new Error('No data found'));
           }
         )
-      );
-    },
+      ),
 
   };
 }

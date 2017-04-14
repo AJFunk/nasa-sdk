@@ -4,7 +4,7 @@ import {
   validateDate,
 } from './util';
 
-export default function marsPhotos(): object {
+export default function marsPhotos(): Object {
   function validateRover(rover: string): string {
     const validRovers = ['curiosity', 'opportunity', 'spirit'];
     const i = validRovers.indexOf(rover.toLowerCase());
@@ -23,8 +23,8 @@ export default function marsPhotos(): object {
 
   return {
 
-    fetch(rover: string, options: object = {}): undefined {
-      return new Promise((resolve: object, reject: object): undefined => {
+    fetch: (rover: string, options: Object = {}): Promise<any> =>
+      new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
         if (!rover) return reject(new Error('Rover name is required'));
         const validRover = validateRover(rover);
         if (!validRover) return reject(new Error('Invalid rover name'));
@@ -43,16 +43,15 @@ export default function marsPhotos(): object {
           'api.nasa.gov',
           `/mars-photos/api/v1/rovers/${validRover}/photos`,
           Object.assign({}, options, { camera: validCamera }),
-          (err: string, data: object): undefined => {
-            if (err) return reject(new Error(err));
-            return resolve(data);
+          (err: Error | null, data?: Object): mixed => {
+            if (err) return reject(err);
+            return data ? resolve(data) : reject(new Error('No data found'));
           }
         );
-      });
-    },
+      }),
 
-    manifest(rover: string): undefined {
-      return new Promise((resolve: object, reject: object): undefined => {
+    manifest: (rover: string): Promise<any> =>
+      new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
         if (!rover) return reject(new Error('Rover name is required'));
         const validRover = validateRover(rover);
         if (!validRover) return reject(new Error('Invalid rover name'));
@@ -60,13 +59,12 @@ export default function marsPhotos(): object {
           'api.nasa.gov',
           `/mars-photos/api/v1/manifests/${validRover}`,
           {},
-          (err: string, data: object): undefined => {
-            if (err) return reject(new Error(err));
-            return resolve(data);
+          (err: Error | null, data?: Object): mixed => {
+            if (err) return reject(err);
+            return data ? resolve(data) : reject(new Error('No data found'));
           }
         );
-      });
-    },
+      }),
 
   };
 }

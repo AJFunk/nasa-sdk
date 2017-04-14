@@ -4,7 +4,7 @@ import {
   validateDate,
 } from './util';
 
-export default function epic(): object {
+export default function epic(): Object {
   function validateType(type: string): string {
     const validTypes = ['natural', 'enhanced'];
     const i = validTypes.indexOf(type.toLowerCase());
@@ -13,8 +13,8 @@ export default function epic(): object {
 
   return {
 
-    fetch(type: string): undefined {
-      return new Promise((resolve: object, reject: object): undefined => {
+    fetch: (type: string): Promise<any> =>
+      new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
         if (!type) return reject(new Error('Image quality type is required'));
         const validType = validateType(type);
         if (!validType) return reject(new Error('Invalid image quality type'));
@@ -22,16 +22,15 @@ export default function epic(): object {
           'api.nasa.gov',
           `/EPIC/api/${validType}`,
           {},
-          (err: string, data: object): undefined => {
-            if (err) return reject(new Error(err));
-            return resolve(data);
+          (err: Error | null, data?: Object): mixed => {
+            if (err) return reject(err);
+            return data ? resolve(data) : reject(new Error('No data found'));
           }
         );
-      });
-    },
+      }),
 
-    date(type: string, date: string): undefined {
-      return new Promise((resolve: object, reject: object): undefined => {
+    date: (type: string, date: string): Promise<any> =>
+      new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
         if (!type) return reject(new Error('Image quality type is required'));
         const validType = validateType(type);
         if (!validType) return reject(new Error('Invalid image quality type'));
@@ -41,16 +40,15 @@ export default function epic(): object {
           'api.nasa.gov',
           `/EPIC/api/${type}/date/${date}`,
           {},
-          (err: string, data: object): undefined => {
-            if (err) return reject(new Error(err));
-            return resolve(data);
+          (err: Error | null, data?: Object): mixed => {
+            if (err) return reject(err);
+            return data ? resolve(data) : reject(new Error('No data found'));
           }
         );
-      });
-    },
+      }),
 
-    all(type: string): undefined {
-      return new Promise((resolve: object, reject: object): undefined => {
+    all: (type: string): Promise<any> =>
+      new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
         if (!type) return reject(new Error('Image quality type is required'));
         const validType = validateType(type);
         if (!validType) return reject(new Error('Invalid image quality type'));
@@ -58,16 +56,15 @@ export default function epic(): object {
           'api.nasa.gov',
           `/EPIC/api/${type}/all`,
           {},
-          (err: string, data: object): undefined => {
-            if (err) return reject(new Error(err));
-            return resolve(data);
+          (err: Error | null, data?: Object): mixed => {
+            if (err) return reject(err);
+            return data ? resolve(data) : reject(new Error('No data found'));
           }
         );
-      });
-    },
+      }),
 
-    available(type: string): undefined {
-      return new Promise((resolve: object, reject: object): undefined => {
+    available: (type: string): Promise<any> =>
+      new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
         if (!type) return reject(new Error('Image quality type is required'));
         const validType = validateType(type);
         if (!validType) return reject(new Error('Invalid image quality type'));
@@ -75,13 +72,12 @@ export default function epic(): object {
           'api.nasa.gov',
           `/EPIC/api/${type}/available`,
           {},
-          (err: string, data: object): undefined => {
-            if (err) return reject(new Error(err));
-            return resolve(data);
+          (err: Error | null, data?: Object): mixed => {
+            if (err) return reject(err);
+            return data ? resolve(data) : reject(new Error('No data found'));
           }
         );
-      });
-    },
+      }),
 
   };
 }

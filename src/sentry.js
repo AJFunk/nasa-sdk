@@ -1,23 +1,22 @@
 // @flow
 import { sendRequest } from './util';
 
-export default function sentry(): object {
+export default function sentry(): Object {
   return {
 
-    fetch(options: object = {}): undefined {
-      return new Promise((resolve: object, reject: object): undefined =>
+    fetch: (options: Object = {}): Promise<any> =>
+      new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed =>
         sendRequest(
           'ssd-api.jpl.nasa.gov',
           '/sentry.api',
           options,
-          (err: string, data: object): undefined => {
-            if (err) return reject(new Error(err));
-            return resolve(data);
+          (err: Error | null, data?: Object): mixed => {
+            if (err) return reject(err);
+            return data ? resolve(data) : reject(new Error('No data found'));
           },
           true
         )
-      );
-    },
+      ),
 
   };
 }

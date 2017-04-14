@@ -4,9 +4,9 @@ import { apiKey } from './config';
 
 const sendRequest = (baseurl: string,
                      endpoint: string,
-                     options: object = {},
-                     cb: object,
-                     noKey: boolean): undefined => {
+                     options: Object = {},
+                     cb: Function,
+                     noKey?: boolean = false): void => {
   let url = `${endpoint}?`;
   if (options) {
     for (const key in options) {
@@ -26,16 +26,16 @@ const sendRequest = (baseurl: string,
     method: 'GET',
   };
 
-  const req = https.request(params, (res: object): null => {
+  const req = https.request(params, (res: any): void => {
     if (res.statusCode < 200 || res.statusCode >= 300) {
-      return cb(`statusCode=${res.statusCode}`);
+      return cb(new Error(`statusCode=${res.statusCode}`));
     }
     const buf = [];
-    res.on('data', (c: object): object => buf.push(c));
-    res.on('end', (): object => cb(null, JSON.parse(Buffer.concat(buf))));
-    return null;
+    res.on('data', (c: Object): number => buf.push(c));
+    res.on('end', (): Object => cb(null, JSON.parse(Buffer.concat(buf).toString())));
+    return undefined;
   });
-  req.on('error', (err: object): object => cb(err));
+  req.on('error', (err: Object): Object => cb(new Error(err)));
   req.end();
 };
 
