@@ -28,14 +28,14 @@ export default function images(): Object {
         if (Object.keys(options).length === 0) {
           return reject(new Error('Expected "q" text search parameter or other keywords'));
         }
-        if (options.hasOwnProperty('mediaType') && !validateMediaType(options.mediaType)) {
-          return reject(new Error('mediaType values must match "image" or "audio"'));
+        if (options.hasOwnProperty('media_type') && !validateMediaType(options.media_type)) {
+          return reject(new Error('media_type values must match "image" or "audio"'));
         }
-        if (options.hasOwnProperty('yearStart') && !validateYear(options.yearStart)) {
-          return reject(new Error('yearStart must be in "YYYY" format'));
+        if (options.hasOwnProperty('year_start') && !validateYear(options.year_start)) {
+          return reject(new Error('year_start must be in "YYYY" format'));
         }
-        if (options.hasOwnProperty('yearEnd') && !validateYear(options.yearEnd)) {
-          return reject(new Error('yearEnd must be in "YYYY" format'));
+        if (options.hasOwnProperty('year_end') && !validateYear(options.year_end)) {
+          return reject(new Error('year_end must be in "YYYY" format'));
         }
         return sendRequest(
           baseUrl,
@@ -44,7 +44,8 @@ export default function images(): Object {
           (err: Error | null, data?: Object): mixed => {
             if (err) return reject(err);
             return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          },
+          true
         );
       }),
 
@@ -53,12 +54,13 @@ export default function images(): Object {
         if (!nasaId) return reject(new Error('nasaId is required'));
         return sendRequest(
           baseUrl,
-          endpoints.asset,
+          `${endpoints.asset}/${nasaId}`,
           {},
           (err: Error | null, data?: Object): mixed => {
             if (err) return reject(err);
             return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          },
+          true
         );
       }),
 
@@ -67,12 +69,13 @@ export default function images(): Object {
         if (!nasaId) return reject(new Error('nasaId is required'));
         return sendRequest(
           baseUrl,
-          endpoints.metadata,
+          `${endpoints.metadata}/${nasaId}`,
           {},
           (err: Error | null, data?: Object): mixed => {
             if (err) return reject(err);
             return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          },
+          true
         );
       }),
 
@@ -81,12 +84,13 @@ export default function images(): Object {
         if (!nasaId) return reject(new Error('nasaId is required'));
         return sendRequest(
           baseUrl,
-          endpoints.captions,
+          `${endpoints.captions}/${nasaId}`,
           {},
           (err: Error | null, data?: Object): mixed => {
             if (err) return reject(err);
             return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          },
+          true
         );
       }),
 
