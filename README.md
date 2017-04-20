@@ -22,6 +22,7 @@ import {
   EONET,
   EPIC,
   Fireballs,
+  Images,
   MarsPhotos,
   NEO,
   NHATS,
@@ -70,6 +71,12 @@ Be sure to reference [NASA's API docs](https://api.nasa.gov/api.html)
 
 ## Fireballs - Visible Meteor Events
 * [Fireballs.fetch()](#fireballs-fetch)
+
+## Images - NASA Media and Video Assets
+* [Images.search()](#images-search)
+* [Images.asset()](#images-asset)
+* [Images.metadata()](#images-metadata)
+* [Images.captions()](#images-captions)
 
 ## Mars Photos - Photos from Mars Rovers
 * [MarsPhotos.fetch()](#marsphotos-fetch)
@@ -408,6 +415,70 @@ Fireballs
     'date-min': '2015-04-03',
     'req-loc': true
   })
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+```
+
+<h3 id='images-search'>Images.search(options)</h3>
+Retrieves results and information on how to retrieve more details on images taken by astronauts
+
+ ##### `options` (required) - **[Object]** Atleast one option property is required, but all individual options are optional
+ * `q` - **[String]** Free text search terms to compare to all indexed metadata
+ * `center` - **[String]** NASA center which published the media
+ * `description` - **[String]** Terms to search for in `Description` fields
+ * `keywords` - **[String]** Terms to search for in `Keywords` fields. Separate multiple values with commas
+ * `location` - **[String]** Terms to search for in `Location` fields
+ * `media_type` - **[String]** Media types to restrict the search to. Available types: [`image`, `audio`]. Separate multiple values with commas
+ * `nasa_id` - **[String]** The media asset’s NASA ID
+ * `photographer` - **[String]** The primary photographer’s name
+ * `secondary_creator` - **[String]** A secondary photographer/videographer’s name
+ * `title` - **[String]** Terms to search for in `Title` fields
+ * `year_start` - **[String]** The start year for results. Must be in `YYYY` format
+ * `year_end` - **[String]** The end year for results. Must be in `YYYY` format
+
+ ```javascript
+Images
+  .search({
+    q: 'Apollo 11',
+    description: 'moon landing',
+    media_type: 'image',
+  })
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+```
+
+<h3 id='images-asset'>Images.asset(nasaId)</h3>
+Get a media asset's manifest for the given NASA ID
+
+##### nasaId (required) - **[String]** The media asset’s NASA ID
+
+```javascript
+Images
+  .asset('as11-40-5874')
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+```
+
+<h3 id='images-metadata'>Images.metadata(nasaId)</h3>
+Get a media asset's metadata location for the given NASA ID
+
+##### nasaId (required) - **[String]** The media asset’s NASA ID
+
+```javascript
+Images
+  .metadata('as11-40-5874')
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+```
+
+<h3 id='images-captions'>Images.captions(nasaId)</h3>
+Get a video asset's captions location for the given NASA ID
+
+##### nasaId (required) - **[String]** The media asset’s NASA ID
+
+```javascript
+Images
+  .captions('172_ISS-Slosh')
   .then(data => console.log(data))
   .catch(err => console.log(err));
 ```
