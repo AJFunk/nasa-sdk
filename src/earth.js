@@ -4,6 +4,7 @@ import {
   sendRequest,
   validateDate,
 } from './util';
+const baseurl = 'api.nasa.gov';
 
 export default function earth(): Object {
   return {
@@ -14,7 +15,7 @@ export default function earth(): Object {
           return reject(new Error('date must be in "YYYY-MM-DD" format'));
         }
         return sendRequest(
-          'api.nasa.gov',
+          baseurl,
           '/planetary/earth/imagery',
           options,
           resolve,
@@ -32,7 +33,7 @@ export default function earth(): Object {
           return reject(new Error('date must be in "YYYY-MM-DD" format'));
         }
         return sendRequest(
-          'api.nasa.gov',
+          baseurl,
           '/planetary/earth/assets',
           options,
           resolve,

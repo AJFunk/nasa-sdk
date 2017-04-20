@@ -3,6 +3,7 @@ import {
   handleResult,
   sendRequest,
 } from './util';
+const baseurl = 'eonet.sci.gsfc.nasa.gov';
 
 export default function eonet(): Object {
   return {
@@ -12,7 +13,7 @@ export default function eonet(): Object {
         let endpoint = '/api/v2.1/events';
         if (options.hasOwnProperty('eventId')) endpoint = `${endpoint}/${options.eventId}`;
         return sendRequest(
-          'eonet.sci.gsfc.nasa.gov',
+          baseurl,
           endpoint,
           options,
           resolve,
@@ -26,7 +27,7 @@ export default function eonet(): Object {
         let endpoint = '/api/v2.1/categories';
         if (options.hasOwnProperty('categoryId')) endpoint = `${endpoint}/${options.categoryId}`;
         return sendRequest(
-          'eonet.sci.gsfc.nasa.gov',
+          baseurl,
           endpoint,
           options,
           resolve,
@@ -38,7 +39,7 @@ export default function eonet(): Object {
     sources: (): Promise<any> =>
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed =>
         sendRequest(
-          'eonet.sci.gsfc.nasa.gov',
+          baseurl,
           '/api/v2.1/sources',
           {},
           resolve,
@@ -52,7 +53,7 @@ export default function eonet(): Object {
         let endpoint = '/api/v2.1/layers';
         if (options.hasOwnProperty('categoryId')) endpoint = `${endpoint}/${options.categoryId}`;
         return sendRequest(
-          'eonet.sci.gsfc.nasa.gov',
+          baseurl,
           endpoint,
           {},
           resolve,

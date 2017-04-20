@@ -4,6 +4,8 @@ import {
   sendRequest,
   validateDate,
 } from './util';
+const baseurl = 'api.nasa.gov';
+const endpointbase = '/neo/rest/v1/';
 
 export default function neo(): Object {
   return {
@@ -17,8 +19,8 @@ export default function neo(): Object {
           return reject(new Error('end_date must be in "YYYY-MM-DD" format'));
         }
         return sendRequest(
-          'api.nasa.gov',
-          '/neo/rest/v1/feed',
+          baseurl,
+          `${endpointbase}feed`,
           options,
           resolve,
           reject,
@@ -29,8 +31,8 @@ export default function neo(): Object {
     feedToday: (options: Object = {}): Promise<any> =>
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed =>
         sendRequest(
-          'api.nasa.gov',
-          '/neo/rest/v1/feed/today',
+          baseurl,
+          `${endpointbase}feed/today`,
           options,
           resolve,
           reject,
@@ -42,8 +44,8 @@ export default function neo(): Object {
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
         if (!asteroidId) return reject(new Error('asteroidId is required'));
         return sendRequest(
-          'api.nasa.gov',
-          `/neo/rest/v1/neo/${asteroidId}`,
+          baseurl,
+          `${endpointbase}neo/${asteroidId}`,
           {},
           resolve,
           reject,
@@ -54,8 +56,8 @@ export default function neo(): Object {
     browse: (options: Object = {}): Promise<any> =>
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed =>
         sendRequest(
-          'api.nasa.gov',
-          '/neo/rest/v1/neo/browse',
+          baseurl,
+          `${endpointbase}neo/browse`,
           options,
           resolve,
           reject,
@@ -66,8 +68,8 @@ export default function neo(): Object {
     stats: (): Promise<any> =>
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed =>
         sendRequest(
-          'api.nasa.gov',
-          '/neo/rest/v1/stats',
+          baseurl,
+          `${endpointbase}stats`,
           {},
           resolve,
           reject,

@@ -4,6 +4,8 @@ import {
   sendRequest,
   validateDate,
 } from './util';
+const baseurl = 'api.nasa.gov';
+const endpointbase = '/EPIC/api/';
 
 export default function epic(): Object {
   function validateType(type: string): string {
@@ -20,8 +22,8 @@ export default function epic(): Object {
         const validType = validateType(type);
         if (!validType) return reject(new Error('Invalid image quality type'));
         return sendRequest(
-          'api.nasa.gov',
-          `/EPIC/api/${validType}`,
+          baseurl,
+          `${endpointbase}${validType}`,
           {},
           resolve,
           reject,
@@ -37,8 +39,8 @@ export default function epic(): Object {
         if (!date) return reject(new Error('date is required'));
         if (!validateDate(date)) return reject(new Error('date must be in "YYYY-MM-DD" format'));
         return sendRequest(
-          'api.nasa.gov',
-          `/EPIC/api/${type}/date/${date}`,
+          baseurl,
+          `${endpointbase}${type}/date/${date}`,
           {},
           resolve,
           reject,
@@ -52,8 +54,8 @@ export default function epic(): Object {
         const validType = validateType(type);
         if (!validType) return reject(new Error('Invalid image quality type'));
         return sendRequest(
-          'api.nasa.gov',
-          `/EPIC/api/${type}/all`,
+          baseurl,
+          `${endpointbase}${type}/all`,
           {},
           resolve,
           reject,
@@ -67,8 +69,8 @@ export default function epic(): Object {
         const validType = validateType(type);
         if (!validType) return reject(new Error('Invalid image quality type'));
         return sendRequest(
-          'api.nasa.gov',
-          `/EPIC/api/${type}/available`,
+          baseurl,
+          `${endpointbase}${type}/available`,
           {},
           resolve,
           reject,

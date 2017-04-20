@@ -4,6 +4,8 @@ import {
   sendRequest,
   validateDate,
 } from './util';
+const baseurl = 'api.nasa.gov';
+const endpointbase = '/mars-photos/api/v1/';
 
 export default function marsPhotos(): Object {
   function validateRover(rover: string): string {
@@ -41,8 +43,8 @@ export default function marsPhotos(): Object {
           return reject(new Error('earth_date must be in "YYYY-MM-DD" format'));
         }
         return sendRequest(
-          'api.nasa.gov',
-          `/mars-photos/api/v1/rovers/${validRover}/photos`,
+          baseurl,
+          `${endpointbase}rovers/${validRover}/photos`,
           Object.assign({}, options, { camera: validCamera }),
           resolve,
           reject,
@@ -56,8 +58,8 @@ export default function marsPhotos(): Object {
         const validRover = validateRover(rover);
         if (!validRover) return reject(new Error('Invalid rover name'));
         return sendRequest(
-          'api.nasa.gov',
-          `/mars-photos/api/v1/manifests/${validRover}`,
+          baseurl,
+          `${endpointbase}manifests/${validRover}`,
           {},
           resolve,
           reject,
