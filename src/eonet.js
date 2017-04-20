@@ -4,13 +4,14 @@ import {
   sendRequest,
 } from './util';
 const baseurl = 'eonet.sci.gsfc.nasa.gov';
+const endpointbase = '/api/v2.1/';
 
 export default function eonet(): Object {
   return {
 
     events: (options: Object = {}): Promise<any> =>
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
-        let endpoint = '/api/v2.1/events';
+        let endpoint = `${endpointbase}events`;
         if (options.hasOwnProperty('eventId')) endpoint = `${endpoint}/${options.eventId}`;
         return sendRequest(
           baseurl,
@@ -24,7 +25,7 @@ export default function eonet(): Object {
 
     categories: (options: Object = {}): Promise<any> =>
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
-        let endpoint = '/api/v2.1/categories';
+        let endpoint = `${endpointbase}categories`;
         if (options.hasOwnProperty('categoryId')) endpoint = `${endpoint}/${options.categoryId}`;
         return sendRequest(
           baseurl,
@@ -40,7 +41,7 @@ export default function eonet(): Object {
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed =>
         sendRequest(
           baseurl,
-          '/api/v2.1/sources',
+          `${endpointbase}sources`,
           {},
           resolve,
           reject,
@@ -50,7 +51,7 @@ export default function eonet(): Object {
 
     layers: (options: Object = {}): Promise<any> =>
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
-        let endpoint = '/api/v2.1/layers';
+        let endpoint = `${endpointbase}layers`;
         if (options.hasOwnProperty('categoryId')) endpoint = `${endpoint}/${options.categoryId}`;
         return sendRequest(
           baseurl,

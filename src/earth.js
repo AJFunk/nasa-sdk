@@ -5,6 +5,7 @@ import {
   validateDate,
 } from './util';
 const baseurl = 'api.nasa.gov';
+const endpointbase = '/planetary/earth/';
 
 export default function earth(): Object {
   return {
@@ -16,7 +17,7 @@ export default function earth(): Object {
         }
         return sendRequest(
           baseurl,
-          '/planetary/earth/imagery',
+          `${endpointbase}imagery`,
           options,
           resolve,
           reject,
@@ -34,7 +35,7 @@ export default function earth(): Object {
         }
         return sendRequest(
           baseurl,
-          '/planetary/earth/assets',
+          `${endpointbase}assets`,
           options,
           resolve,
           reject,
