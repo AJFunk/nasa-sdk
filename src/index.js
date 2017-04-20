@@ -6,6 +6,7 @@ const Earth = require('./earth')();
 const EONET = require('./eonet')();
 const EPIC = require('./epic')();
 const Fireballs = require('./fireballs')();
+const Images = require('./images')();
 const MarsPhotos = require('./mars-photos')();
 const NEO = require('./neo')();
 const NHATS = require('./nhats')();
@@ -21,6 +22,7 @@ export {
   EONET,
   EPIC,
   Fireballs,
+  Images,
   MarsPhotos,
   NEO,
   NHATS,
