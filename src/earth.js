@@ -1,5 +1,6 @@
 // @flow
 import {
+  handleResult,
   sendRequest,
   validateDate,
 } from './util';
@@ -16,10 +17,9 @@ export default function earth(): Object {
           'api.nasa.gov',
           '/planetary/earth/imagery',
           options,
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
@@ -35,10 +35,9 @@ export default function earth(): Object {
           'api.nasa.gov',
           '/planetary/earth/assets',
           options,
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 

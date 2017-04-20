@@ -1,5 +1,8 @@
 // @flow
-import { sendRequest } from './util';
+import {
+  handleResult,
+  sendRequest,
+} from './util';
 
 export default function eonet(): Object {
   return {
@@ -12,10 +15,9 @@ export default function eonet(): Object {
           'eonet.sci.gsfc.nasa.gov',
           endpoint,
           options,
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
@@ -27,10 +29,9 @@ export default function eonet(): Object {
           'eonet.sci.gsfc.nasa.gov',
           endpoint,
           options,
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
@@ -40,10 +41,9 @@ export default function eonet(): Object {
           'eonet.sci.gsfc.nasa.gov',
           '/api/v2.1/sources',
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         )
       ),
 
@@ -55,10 +55,9 @@ export default function eonet(): Object {
           'eonet.sci.gsfc.nasa.gov',
           endpoint,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 

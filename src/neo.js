@@ -1,5 +1,6 @@
 // @flow
 import {
+  handleResult,
   sendRequest,
   validateDate,
 } from './util';
@@ -19,10 +20,9 @@ export default function neo(): Object {
           'api.nasa.gov',
           '/neo/rest/v1/feed',
           options,
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
@@ -32,10 +32,9 @@ export default function neo(): Object {
           'api.nasa.gov',
           '/neo/rest/v1/feed/today',
           options,
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         )
       ),
 
@@ -46,10 +45,9 @@ export default function neo(): Object {
           'api.nasa.gov',
           `/neo/rest/v1/neo/${asteroidId}`,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
@@ -59,10 +57,9 @@ export default function neo(): Object {
           'api.nasa.gov',
           '/neo/rest/v1/neo/browse',
           options,
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         )
       ),
 
@@ -72,10 +69,9 @@ export default function neo(): Object {
           'api.nasa.gov',
           '/neo/rest/v1/stats',
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         )
       ),
 

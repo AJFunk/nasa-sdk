@@ -1,5 +1,6 @@
 // @flow
 import {
+  handleResult,
   sendRequest,
   validateDate,
 } from './util';
@@ -22,10 +23,9 @@ export default function epic(): Object {
           'api.nasa.gov',
           `/EPIC/api/${validType}`,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
@@ -40,10 +40,9 @@ export default function epic(): Object {
           'api.nasa.gov',
           `/EPIC/api/${type}/date/${date}`,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
@@ -56,10 +55,9 @@ export default function epic(): Object {
           'api.nasa.gov',
           `/EPIC/api/${type}/all`,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
@@ -72,10 +70,9 @@ export default function epic(): Object {
           'api.nasa.gov',
           `/EPIC/api/${type}/available`,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 

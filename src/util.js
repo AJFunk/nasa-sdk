@@ -2,9 +2,19 @@
 import https from 'https';
 import { apiKey } from './config';
 
+const handleResult = (resolve: (data: Object) => void,
+                      reject: (reason: Error) => void,
+                      err: Error | null,
+                      data?: Object): mixed => {
+  if (err) return reject(err);
+  return data ? resolve(data) : reject(new Error('No data found'));
+};
+
 const sendRequest = (baseurl: string,
                      endpoint: string,
                      options: Object = {},
+                     resolve: (data: Object) => void,
+                     reject: (reason: Error) => void,
                      cb: Function,
                      noKey?: boolean = false): void => {
   let url = `${endpoint}?`;
@@ -28,14 +38,15 @@ const sendRequest = (baseurl: string,
 
   const req = https.request(params, (res: any): void => {
     if (res.statusCode < 200 || res.statusCode >= 300) {
-      return cb(new Error(`statusCode=${res.statusCode}`));
+      return cb(resolve, reject, new Error(`statusCode=${res.statusCode}`));
     }
     const buf = [];
     res.on('data', (c: Object): number => buf.push(c));
-    res.on('end', (): Object => cb(null, JSON.parse(Buffer.concat(buf).toString())));
+    res.on('end', (): Object =>
+      cb(resolve, reject, null, JSON.parse(Buffer.concat(buf).toString())));
     return undefined;
   });
-  req.on('error', (err: Object): Object => cb(new Error(err)));
+  req.on('error', (err: Object): Object => cb(resolve, reject, new Error(err)));
   req.end();
 };
 
@@ -50,6 +61,7 @@ const validateDateTime = (date: string): boolean => {
 };
 
 export {
+  handleResult,
   sendRequest,
   validateDate,
   validateDateTime,

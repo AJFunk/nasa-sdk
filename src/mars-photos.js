@@ -1,5 +1,6 @@
 // @flow
 import {
+  handleResult,
   sendRequest,
   validateDate,
 } from './util';
@@ -43,10 +44,9 @@ export default function marsPhotos(): Object {
           'api.nasa.gov',
           `/mars-photos/api/v1/rovers/${validRover}/photos`,
           Object.assign({}, options, { camera: validCamera }),
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
@@ -59,10 +59,9 @@ export default function marsPhotos(): Object {
           'api.nasa.gov',
           `/mars-photos/api/v1/manifests/${validRover}`,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
