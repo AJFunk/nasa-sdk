@@ -1,5 +1,6 @@
 // @flow
 import {
+  handleResult,
   sendRequest,
   validateDate,
   validateDateTime,
@@ -31,10 +32,9 @@ export default function cad(): Object {
           'ssd-api.jpl.nasa.gov',
           '/cad.api',
           Object.assign({}, options, optionOverrides),
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          },
+          resolve,
+          reject,
+          handleResult,
           true
         );
       }),

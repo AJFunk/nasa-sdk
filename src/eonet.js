@@ -1,64 +1,65 @@
 // @flow
-import { sendRequest } from './util';
+import {
+  handleResult,
+  sendRequest,
+} from './util';
+const baseurl = 'eonet.sci.gsfc.nasa.gov';
+const endpointbase = '/api/v2.1/';
 
 export default function eonet(): Object {
   return {
 
     events: (options: Object = {}): Promise<any> =>
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
-        let endpoint = '/api/v2.1/events';
+        let endpoint = `${endpointbase}events`;
         if (options.hasOwnProperty('eventId')) endpoint = `${endpoint}/${options.eventId}`;
         return sendRequest(
-          'eonet.sci.gsfc.nasa.gov',
+          baseurl,
           endpoint,
           options,
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
     categories: (options: Object = {}): Promise<any> =>
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
-        let endpoint = '/api/v2.1/categories';
+        let endpoint = `${endpointbase}categories`;
         if (options.hasOwnProperty('categoryId')) endpoint = `${endpoint}/${options.categoryId}`;
         return sendRequest(
-          'eonet.sci.gsfc.nasa.gov',
+          baseurl,
           endpoint,
           options,
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
     sources: (): Promise<any> =>
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed =>
         sendRequest(
-          'eonet.sci.gsfc.nasa.gov',
-          '/api/v2.1/sources',
+          baseurl,
+          `${endpointbase}sources`,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         )
       ),
 
     layers: (options: Object = {}): Promise<any> =>
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
-        let endpoint = '/api/v2.1/layers';
+        let endpoint = `${endpointbase}layers`;
         if (options.hasOwnProperty('categoryId')) endpoint = `${endpoint}/${options.categoryId}`;
         return sendRequest(
-          'eonet.sci.gsfc.nasa.gov',
+          baseurl,
           endpoint,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 

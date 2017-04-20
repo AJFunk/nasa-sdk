@@ -1,5 +1,8 @@
 // @flow
-import { sendRequest } from './util';
+import {
+  handleResult,
+  sendRequest,
+} from './util';
 
 export default function nhats(): Object {
   return {
@@ -10,10 +13,9 @@ export default function nhats(): Object {
           'ssd-api.jpl.nasa.gov',
           '/nhats.api',
           options,
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          },
+          resolve,
+          reject,
+          handleResult,
           true
         )
       ),
