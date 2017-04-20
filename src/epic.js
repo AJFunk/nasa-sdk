@@ -1,8 +1,11 @@
 // @flow
 import {
+  handleResult,
   sendRequest,
   validateDate,
 } from './util';
+const baseurl = 'api.nasa.gov';
+const endpointbase = '/EPIC/api/';
 
 export default function epic(): Object {
   function validateType(type: string): string {
@@ -19,13 +22,12 @@ export default function epic(): Object {
         const validType = validateType(type);
         if (!validType) return reject(new Error('Invalid image quality type'));
         return sendRequest(
-          'api.nasa.gov',
-          `/EPIC/api/${validType}`,
+          baseurl,
+          `${endpointbase}${validType}`,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
@@ -37,13 +39,12 @@ export default function epic(): Object {
         if (!date) return reject(new Error('date is required'));
         if (!validateDate(date)) return reject(new Error('date must be in "YYYY-MM-DD" format'));
         return sendRequest(
-          'api.nasa.gov',
-          `/EPIC/api/${type}/date/${date}`,
+          baseurl,
+          `${endpointbase}${type}/date/${date}`,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
@@ -53,13 +54,12 @@ export default function epic(): Object {
         const validType = validateType(type);
         if (!validType) return reject(new Error('Invalid image quality type'));
         return sendRequest(
-          'api.nasa.gov',
-          `/EPIC/api/${type}/all`,
+          baseurl,
+          `${endpointbase}${type}/all`,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
@@ -69,13 +69,12 @@ export default function epic(): Object {
         const validType = validateType(type);
         if (!validType) return reject(new Error('Invalid image quality type'));
         return sendRequest(
-          'api.nasa.gov',
-          `/EPIC/api/${type}/available`,
+          baseurl,
+          `${endpointbase}${type}/available`,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 

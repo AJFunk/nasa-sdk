@@ -1,8 +1,11 @@
 // @flow
 import {
+  handleResult,
   sendRequest,
   validateDate,
 } from './util';
+const baseurl = 'api.nasa.gov';
+const endpointbase = '/planetary/earth/';
 
 export default function earth(): Object {
   return {
@@ -13,13 +16,12 @@ export default function earth(): Object {
           return reject(new Error('date must be in "YYYY-MM-DD" format'));
         }
         return sendRequest(
-          'api.nasa.gov',
-          '/planetary/earth/imagery',
+          baseurl,
+          `${endpointbase}imagery`,
           options,
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
@@ -32,13 +34,12 @@ export default function earth(): Object {
           return reject(new Error('date must be in "YYYY-MM-DD" format'));
         }
         return sendRequest(
-          'api.nasa.gov',
-          '/planetary/earth/assets',
+          baseurl,
+          `${endpointbase}assets`,
           options,
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 

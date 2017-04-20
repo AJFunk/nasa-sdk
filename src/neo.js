@@ -1,8 +1,11 @@
 // @flow
 import {
+  handleResult,
   sendRequest,
   validateDate,
 } from './util';
+const baseurl = 'api.nasa.gov';
+const endpointbase = '/neo/rest/v1/';
 
 export default function neo(): Object {
   return {
@@ -16,26 +19,24 @@ export default function neo(): Object {
           return reject(new Error('end_date must be in "YYYY-MM-DD" format'));
         }
         return sendRequest(
-          'api.nasa.gov',
-          '/neo/rest/v1/feed',
+          baseurl,
+          `${endpointbase}feed`,
           options,
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
     feedToday: (options: Object = {}): Promise<any> =>
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed =>
         sendRequest(
-          'api.nasa.gov',
-          '/neo/rest/v1/feed/today',
+          baseurl,
+          `${endpointbase}feed/today`,
           options,
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         )
       ),
 
@@ -43,39 +44,36 @@ export default function neo(): Object {
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
         if (!asteroidId) return reject(new Error('asteroidId is required'));
         return sendRequest(
-          'api.nasa.gov',
-          `/neo/rest/v1/neo/${asteroidId}`,
+          baseurl,
+          `${endpointbase}neo/${asteroidId}`,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         );
       }),
 
     browse: (options: Object = {}): Promise<any> =>
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed =>
         sendRequest(
-          'api.nasa.gov',
-          '/neo/rest/v1/neo/browse',
+          baseurl,
+          `${endpointbase}neo/browse`,
           options,
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         )
       ),
 
     stats: (): Promise<any> =>
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed =>
         sendRequest(
-          'api.nasa.gov',
-          '/neo/rest/v1/stats',
+          baseurl,
+          `${endpointbase}stats`,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          }
+          resolve,
+          reject,
+          handleResult
         )
       ),
 
