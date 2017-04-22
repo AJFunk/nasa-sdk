@@ -21,7 +21,7 @@ export default function images(): Object {
 
     search: (options: Object = {}): Promise<any> =>
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
-        if (Object.keys(options).length === 0) {
+        if (options.length === 0) {
           return reject(new Error('Atleast one search param is required'));
         }
         if (options.hasOwnProperty('media_type') && !validateMediaType(options.media_type)) {
