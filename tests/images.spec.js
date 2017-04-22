@@ -24,6 +24,10 @@ describe('Images.search()', () => {
   );
 
   it('returns error message', () =>
+    Images.search({ media_type: 'img,audio' }).catch(err => expect(err).to.be.an('error'))
+  );
+
+  it('returns error message', () =>
     Images.search({ year_start: '123-456-789' }).catch(err => expect(err).to.be.an('error'))
   );
 });

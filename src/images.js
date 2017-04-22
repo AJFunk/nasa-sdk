@@ -7,10 +7,9 @@ import {
 export default function images(): Object {
   const baseurl = 'images-api.nasa.gov';
 
-  function validateMediaType(mediaType: string): string {
-    const validMediaTypes = ['image', 'audio'];
-    const i = validMediaTypes.indexOf(mediaType.toLowerCase());
-    return i === -1 ? '' : validMediaTypes[i];
+  function validateMediaType(mediaType: string): boolean {
+    if (!mediaType || typeof mediaType !== 'string') return false;
+    return mediaType.match(/^image$|^audio$|^image,audio$|^audio,image$/) !== null;
   }
 
   function validateYear(year: string): boolean {
@@ -26,7 +25,9 @@ export default function images(): Object {
           return reject(new Error('Atleast one search param is required'));
         }
         if (options.hasOwnProperty('media_type') && !validateMediaType(options.media_type)) {
-          return reject(new Error('media_type values must match "image" or "audio"'));
+          return reject(
+            new Error('media_type values must match image||audio||image,audio||audio,image')
+          );
         }
         if (options.hasOwnProperty('year_start') && !validateYear(options.year_start)) {
           return reject(new Error('year_start must be in "YYYY" format'));
