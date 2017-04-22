@@ -40,10 +40,12 @@ const sendRequest = (baseurl: string,
     if (res.statusCode < 200 || res.statusCode >= 300) {
       return cb(resolve, reject, new Error(`statusCode=${res.statusCode}`));
     }
-    const buf = [];
-    res.on('data', (c: Object): number => buf.push(c));
+    let body = '';
+    res.on('data', (c: Object): void => {
+      body += c;
+    });
     res.on('end', (): Object =>
-      cb(resolve, reject, null, JSON.parse(Buffer.concat(buf).toString())));
+      cb(resolve, reject, null, JSON.parse(body)));
     return undefined;
   });
   req.on('error', (err: Object): Object => cb(resolve, reject, new Error(err)));
