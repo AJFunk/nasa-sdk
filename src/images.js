@@ -1,14 +1,11 @@
 // @flow
-import { sendRequest } from './util';
+import {
+  handleResult,
+  sendRequest,
+} from './util';
 
 export default function images(): Object {
-  const baseUrl = 'images-api.nasa.gov';
-  const endpoints = {
-    search: '/search',
-    asset: '/asset',
-    metadata: '/metadata',
-    captions: '/captions',
-  };
+  const baseurl = 'images-api.nasa.gov';
 
   function validateMediaType(mediaType: string): string {
     const validMediaTypes = ['image', 'audio'];
@@ -26,7 +23,7 @@ export default function images(): Object {
     search: (options: Object = {}): Promise<any> =>
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
         if (Object.keys(options).length === 0) {
-          return reject(new Error('Expected "q" text search parameter or other keywords'));
+          return reject(new Error('Atleast one search param is required'));
         }
         if (options.hasOwnProperty('media_type') && !validateMediaType(options.media_type)) {
           return reject(new Error('media_type values must match "image" or "audio"'));
@@ -38,13 +35,12 @@ export default function images(): Object {
           return reject(new Error('year_end must be in "YYYY" format'));
         }
         return sendRequest(
-          baseUrl,
-          endpoints.search,
+          baseurl,
+          '/search',
           options,
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          },
+          resolve,
+          reject,
+          handleResult,
           true
         );
       }),
@@ -53,13 +49,12 @@ export default function images(): Object {
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
         if (!nasaId) return reject(new Error('nasaId is required'));
         return sendRequest(
-          baseUrl,
-          `${endpoints.asset}/${nasaId}`,
+          baseurl,
+          `/asset/${nasaId}`,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          },
+          resolve,
+          reject,
+          handleResult,
           true
         );
       }),
@@ -68,13 +63,12 @@ export default function images(): Object {
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
         if (!nasaId) return reject(new Error('nasaId is required'));
         return sendRequest(
-          baseUrl,
-          `${endpoints.metadata}/${nasaId}`,
+          baseurl,
+          `/metadata/${nasaId}`,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          },
+          resolve,
+          reject,
+          handleResult,
           true
         );
       }),
@@ -83,14 +77,13 @@ export default function images(): Object {
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
         if (!nasaId) return reject(new Error('nasaId is required'));
         return sendRequest(
-          baseUrl,
-          `${endpoints.captions}/${nasaId}`,
+          baseurl,
+          `/captions/${nasaId}`,
           {},
-          (err: Error | null, data?: Object): mixed => {
-            if (err) return reject(err);
-            return data ? resolve(data) : reject(new Error('No data found'));
-          },
-          true
+          resolve,
+          reject,
+          handleResult,
+          true,
         );
       }),
 
