@@ -420,7 +420,8 @@ Fireballs
 ```
 
 <h3 id='images-search'>Images.search(options)</h3>
-Retrieves results and information on how to retrieve more details on images taken by astronauts
+
+Retrieves results and information on how to retrieve more details on images taken by astronauts. For additional information, the [API Documentation](https://images.nasa.gov/docs/images.nasa.gov_api_docs.pdf)
 
  ##### `options` (required) - **[Object]** Atleast one option property is required, but all individual options are optional
  * `q` - **[String]** Free text search terms to compare to all indexed metadata
