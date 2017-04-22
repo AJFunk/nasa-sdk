@@ -42,7 +42,7 @@ const sendRequest = (baseurl: string,
     }
     let body = '';
     res.on('data', (c: Object): void => {
-      body += c;
+      body += c.toString();
     });
     res.on('end', (): Object =>
       cb(resolve, reject, null, JSON.parse(body)));
