@@ -21,7 +21,6 @@ export default function images(): Object {
 
     search: (options: Object = {}): Promise<any> =>
       new Promise((resolve: (data: Object) => void, reject: (reason: Error) => void): mixed => {
-        console.log(!Object.keys(options).length);
         if (!Object.keys(options).length) {
           return reject(new Error('Atleast one search param is required'));
         }
