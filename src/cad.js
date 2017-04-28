@@ -7,6 +7,22 @@ import {
 } from './util';
 
 export default function cad(): Object {
+  function validateClass(className: String): boolean {
+    const validClasses = [
+      'IEO', 'ATE', 'APO', 'AMO', 'MCA', 'IMB', 'MBA', 'OMB', 'TJN', 'CEN', 'TNO',
+      'PAA', 'HYA', 'HYP', 'PAR', 'COM', 'JFC', 'HTC', 'ETc', 'CTc', 'JFc',
+    ];
+    return validClasses.indexOf(className) === -1;
+  }
+
+  function validateBody(body: String): boolean {
+    const validBodies = [
+      'merc', 'venus', 'earth', 'mars', 'juptr', 'satrn', 'urnus', 'neptn', 'pluto', 'moon',
+    ];
+    return validBodies.indexOf(body.toLowerCase()) === -1;
+  }
+
+
   return {
 
     fetch: (options: Object = {}): Promise<any> =>
@@ -27,6 +43,12 @@ export default function cad(): Object {
               return reject(new Error('date-max is not in a valid format.'));
             }
           }
+        }
+        if (options.hasOwnProperty('class')) {
+          if (!validateClass(options.class)) return reject(new Error('Invalid class value'));
+        }
+        if (options.hasOwnProperty('body')) {
+          if (!validateBody(options.body)) return reject(new Error('Invalid body value'));
         }
         return sendRequest(
           'ssd-api.jpl.nasa.gov',
