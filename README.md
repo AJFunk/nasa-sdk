@@ -5,7 +5,9 @@ NASA API wrapper for Node.js
 
 This SDK makes it simple to integrate many of NASA's APIs. Some of them require getting an API key from [https://api.nasa.gov](https://api.nasa.gov), which is free and easy. API keys are limited to 1000 requests/hour. We have implemented error checking in order to prevent bad requests being sent to NASA APIs, thus saving you from wasting your requests.
 
-This project has **no dependencies!** and uses modern ES2016+ syntax, which means you can use promises (as shown in the documentation) or async/await.
+This project uses modern ES2016+ syntax, which means you can use promises (as shown in the documentation) or async/await.
+
+The only dependency is `babel-runtime` which is used for browser compatibility.
 
 Our goal is to integrate as many APIs as possible to allow JavaScript developers to easily access information about our planet, solar system, and beyond. If you have any APIs you would like to see added, please let us know by opening an issue!
 
