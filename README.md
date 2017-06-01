@@ -7,8 +7,6 @@ This SDK makes it simple to integrate many of NASA's APIs. Some of them require 
 
 This project uses modern ES2016+ syntax, which means you can use promises (as shown in the documentation) or async/await.
 
-The only dependency is `babel-runtime` which is used for browser compatibility.
-
 Our goal is to integrate as many APIs as possible to allow JavaScript developers to easily access information about our planet, solar system, and beyond. If you have any APIs you would like to see added, please let us know by opening an issue!
 
 ### Installation
