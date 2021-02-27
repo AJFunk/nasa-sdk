@@ -9,7 +9,7 @@ const endpointbase = '/mars-photos/api/v1/';
 
 export default function marsPhotos(): Object {
   function validateRover(rover: string): string {
-    const validRovers = ['curiosity', 'opportunity', 'spirit','perseverance'];
+    const validRovers = ['curiosity', 'opportunity', 'spirit', 'perseverance'];
     const i = validRovers.indexOf(rover.toLowerCase());
     return i === -1 ? '' : validRovers[i];
   }
@@ -19,7 +19,8 @@ export default function marsPhotos(): Object {
       curiosity: ['fhaz', 'rhaz', 'mast', 'chemcam', 'mahli', 'mardi', 'navcam'],
       opportunity: ['fhaz', 'rhaz', 'navcam', 'pancam', 'minites'],
       spirit: ['fhaz', 'rhaz', 'navcam', 'pancam', 'minites'],
-      perseverance: ['edl_rucam','edl_rdcam','edl_ddcam','edl_pucam1','edl_pucam2','navcam_left','navcam_right','mcz_right','mcz_left','front_hazcam_left_a','front_hazcam_right_a','rear_hazcam_left','rear_hazcam_right'],
+      // eslint-disable-next-line max-len
+      perseverance: ['edl_rucam', 'edl_rdcam', 'edl_ddcam', 'edl_pucam1', 'edl_pucam2', 'navcam_left', 'navcam_right', 'mcz_right', 'mcz_left', 'front_hazcam_left_a', 'front_hazcam_right_a', 'rear_hazcam_left', 'rear_hazcam_right'],
     };
     const i = validCameras[rover].indexOf(camera.toLowerCase());
     return i === -1 ? '' : validCameras[rover][i];
