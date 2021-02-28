@@ -7,6 +7,11 @@ describe('MarsPhotos.fetch()', () => {
   );
 
   it('returns object', () =>
+    MarsPhotos.fetch('perseverance', { sol: 2 }).then(data =>
+      expect(data).to.be.instanceof(Object))
+  );
+
+  it('returns object', () =>
     MarsPhotos.fetch('curiosity', {
       camera: 'fhaz',
       earth_date: '2016-03-12',
