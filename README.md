@@ -488,12 +488,12 @@ Images
 Get a list of photos from a Mars Rover on a particular Sol/Earth Day
 
 ##### `rover` (required) - **[String]**
-Rover to fetch photos from. Valid rover names are `curiosity`, `opportunity`, and `spirit`
+Rover to fetch photos from. Valid rover names are `curiosity`, `opportunity`, `spirit`, and `perseverance`
 
 ##### `options` (required) - **[Object]**
 * `sol` - **[Number]** Martian day on which photos were taken, relative to when the rover arrived on Mars, starting at `0`. If the `sol` option is not provided, `earth_date` must be provided instead.
 * `earth_date` - **[String]** Date on which photos were taken. If the `earth_date` option is not provided, `sol` must be provided. Must be in `YYYY-MM-DD` format.
-* `camera` - **[String]** Filter results for photos from a specific camera. See [this rover camera table](https://api.nasa.gov/api.html#MarsPhotos) for a list of available cameras on each rover
+* `camera` - **[String]** Filter results for photos from a specific camera. See [this rover camera table](https://github.com/chrisccerami/mars-photo-api#cameras) for a list of available cameras on each rover
 * `page` - **[Number]** Page number to fetch from paginated results
 
 ```javascript
@@ -510,7 +510,7 @@ MarsPhotos
 Get a manifest for a Mars Rover
 
 ##### `rover` (required) - **[String]**
-Rover to fetch manifest for. Valid rover names are `curiosity`, `opportunity`, and `spirit`
+Rover to fetch manifest for. Valid rover names are `curiosity`, `opportunity`, `spirit`, and `perseverance`
 
 ```javascript
 MarsPhotos
