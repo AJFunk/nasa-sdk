@@ -21,7 +21,8 @@ export default function marsPhotos(): Object {
       spirit: ['fhaz', 'rhaz', 'navcam', 'pancam', 'minites'],
       perseverance: ['edl_rucam', 'edl_rdcam', 'edl_ddcam', 'edl_pucam1', 'edl_pucam2',
         'navcam_left', 'navcam_right', 'mcz_right', 'mcz_left', 'front_hazcam_left_a',
-        'front_hazcam_right_a', 'rear_hazcam_left', 'rear_hazcam_right'],
+        'front_hazcam_right_a', 'rear_hazcam_left', 'rear_hazcam_right', 'skycam',
+        'sherloc_watson'],
     };
     const i = validCameras[rover].indexOf(camera.toLowerCase());
     return i === -1 ? '' : validCameras[rover][i];
